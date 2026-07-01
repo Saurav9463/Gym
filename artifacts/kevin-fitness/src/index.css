@@ -88,8 +88,8 @@
   --popover-foreground: 30 31% 94%;
   --popover-border: 0 0% 10%;
 
-  /* Primary accent #E8C547 */
-  --primary: 47 78% 59%;
+  /* Primary accent #F5C800 — brighter yellow */
+  --primary: 49 100% 55%;
   --primary-foreground: 0 0% 4%;
 
   /* Secondary gold #B8972E */
@@ -144,7 +144,7 @@
   --popover: 0 0% 7%;
   --popover-foreground: 30 31% 94%;
   --popover-border: 0 0% 10%;
-  --primary: 47 78% 59%;
+  --primary: 49 100% 55%;
   --primary-foreground: 0 0% 4%;
   --secondary: 46 60% 45%;
   --secondary-foreground: 30 31% 94%;
@@ -155,7 +155,7 @@
   --destructive: 0 84% 60%;
   --destructive-foreground: 30 31% 94%;
   --input: 0 0% 15%;
-  --ring: 47 78% 59%;
+  --ring: 49 100% 55%;
 }
 
 @layer base {
@@ -200,6 +200,21 @@
   text-transform: uppercase;
 }
 .ghost-gold-btn:hover {
-  box-shadow: 0 0 15px -3px hsla(var(--primary) / 0.5);
-  background: transparent;
+  background: hsl(var(--primary));
+  color: hsl(var(--primary-foreground));
+  box-shadow: 0 0 25px -5px hsla(var(--primary) / 0.6);
 }
+
+/* Marquee */
+@keyframes marquee {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+.marquee-track {
+  animation: marquee 22s linear infinite;
+  width: max-content;
+}
+
+/* Hide scrollbar utility */
+.hide-scrollbar::-webkit-scrollbar { display: none; }
+.hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }

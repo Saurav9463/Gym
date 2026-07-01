@@ -48,7 +48,7 @@ export default function Navbar() {
               ))}
               <Link
                 href="/book"
-                className="px-6 py-2 border border-primary text-primary font-display tracking-widest uppercase hover:bg-primary hover:text-background transition-all"
+                className="px-6 py-2 bg-primary text-black font-display tracking-widest uppercase hover:bg-white transition-all"
               >
                 Join Now
               </Link>
