@@ -99,7 +99,7 @@ export default function TrainersAdmin() {
             <div key={trainer.id} className={`bg-card border flex flex-col sm:flex-row ${trainer.active ? 'border-border' : 'border-destructive/30 opacity-60'}`}>
               <div className="w-full sm:w-32 h-48 sm:h-auto shrink-0 bg-[#0a0a0a]">
                 {trainer.photo_url ? (
-                  <img src={trainer.photo_url} alt={trainer.name} className="w-full h-full object-cover grayscale" />
+                  <img src={trainer.photo_url} alt={trainer.name} className="w-full h-full object-cover" />
                 ) : (
                   <div className="w-full h-full flex items-center justify-center font-mono text-xs text-muted-foreground">No Photo</div>
                 )}
