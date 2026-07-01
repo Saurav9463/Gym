@@ -1,0 +1,212 @@
+You are a senior award-winning frontend developer and UI/UX designer.
+
+Build a premium gym website inspired by the quality, smoothness, animations, and professionalism of:
+https://proultimate.com/
+
+IMPORTANT:
+This is only design inspiration.
+Do NOT copy their layout, assets, branding, text, colors, images or copyrighted content.
+Create an original premium design with its own identity.
+
+GOAL:
+The website should feel like a ₹20+ lakh custom agency website built by a top design studio.
+
+Stack:
+- React
+- TypeScript
+- Tailwind CSS
+- Framer Motion
+- GSAP (where appropriate)
+- Lenis smooth scrolling
+- Lucide Icons
+
+The website must score high on Lighthouse and remain smooth at 60fps.
+
+-------------------------------------------------
+STYLE
+-------------------------------------------------
+
+Modern luxury fitness brand
+
+Dark theme
+
+Primary colors:
+Black
+Dark charcoal
+White
+Metallic gray
+Red accent (#e11d48)
+
+Use bold typography.
+
+Large spacing.
+
+Full-width sections.
+
+Premium gradients.
+
+Glassmorphism only where necessary.
+
+Micro interactions everywhere.
+
+No generic templates.
+
+No Bootstrap appearance.
+
+-------------------------------------------------
+ANIMATIONS
+-------------------------------------------------
+
+Use premium animations throughout.
+
+Examples:
+
+• Smooth page reveal
+• Hero text reveal
+• Scroll-triggered fade animations
+• Cards slide upward
+• Images scale while scrolling
+• Parallax backgrounds
+• Mouse hover effects
+• Floating particles (very subtle)
+• Animated counters
+• Animated progress bars
+• Marquee logos
+• Smooth accordion
+• Button magnetic effect
+• Cursor interactions (optional)
+• Sticky sections
+• Scroll progress indicator
+
+Scrolling should feel similar to modern Apple, Stripe and Awwwards websites.
+
+-------------------------------------------------
+SECTIONS
+-------------------------------------------------
+
+1. Hero
+- Fullscreen
+- Background video
+- Dark overlay
+- Huge typography
+- CTA
+- Secondary CTA
+
+2. Why Choose Us
+
+3. Gym Services
+
+4. Membership Plans
+
+5. Trainers
+
+6. Transformations
+
+7. Equipment Gallery
+
+8. Client Testimonials
+
+9. Animated Statistics
+
+10. Success Stories
+
+11. Instagram Feed
+
+12. FAQs
+
+13. Contact
+
+14. Footer
+
+-------------------------------------------------
+SPECIAL FEATURES
+-------------------------------------------------
+
+Hero video
+
+Before/After slider
+
+Animated BMI Calculator
+
+Membership pricing calculator
+
+Workout program cards
+
+Transformation gallery
+
+Interactive equipment showcase
+
+Sticky booking CTA
+
+WhatsApp floating button
+
+Google Maps
+
+-------------------------------------------------
+PERFORMANCE
+-------------------------------------------------
+
+Lazy load images
+
+Lazy load videos
+
+Code splitting
+
+Image optimization
+
+Responsive everywhere
+
+No layout shift
+
+No animation jank
+
+-------------------------------------------------
+ADMIN FRIENDLY
+-------------------------------------------------
+
+Separate all data from UI.
+
+Create a data folder.
+
+Store:
+
+Services
+
+Plans
+
+Trainers
+
+Testimonials
+
+Gallery
+
+FAQs
+
+Statistics
+
+in JSON/TS files so they can later be connected to a CMS without redesigning components.
+
+-------------------------------------------------
+CODE QUALITY
+-------------------------------------------------
+
+Component based architecture.
+
+Reusable components.
+
+Clean folder structure.
+
+Production-ready code.
+
+No unnecessary libraries.
+
+No duplicated code.
+
+Use best practices.
+
+-------------------------------------------------
+RESULT
+
+The final website should look like it belongs to a premium fitness brand that invested ₹5–10 lakhs into its website.
+
+It should impress clients immediately and be portfolio-worthy.
