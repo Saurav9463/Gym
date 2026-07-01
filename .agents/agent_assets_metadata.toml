@@ -1,0 +1,26 @@
+uploads = []
+outputs = []
+
+[[generated]]
+id = "MzbkTfLD0Z_tYEaIARRiQ"
+uri = "file://artifacts/kevin-fitness/public/hero1.png"
+type = "image"
+title = "Dark premium gym hero image"
+
+[[generated]]
+id = "0CbA0RRpI2RySFmaqwUiw"
+uri = "file://artifacts/kevin-fitness/public/hero2.png"
+type = "image"
+title = "Modern gym equipment close-up"
+
+[[generated]]
+id = "ACi8hMsxZYmE7RTlSjaKm"
+uri = "file://artifacts/kevin-fitness/public/gallery1.png"
+type = "image"
+title = "Dark fitness gallery shot"
+
+[[generated]]
+id = "sgwiUrtzJAa1uFTDKRN0h"
+uri = "file://artifacts/kevin-fitness/public/gallery2.png"
+type = "image"
+title = "Weight training gallery shot"
