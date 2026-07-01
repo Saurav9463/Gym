@@ -1,0 +1,373 @@
+You are a senior full-stack developer and UI/UX designer. Build a complete, 
+professional gym website with an admin dashboard. I will provide all gym 
+details below. The design must look like it was crafted by a world-class 
+human designer — not AI generated. Every spacing, typography, and color 
+decision must feel intentional.
+
+---
+
+## 🏋️ GYM DETAILS
+[PASTE YOUR GYM NAME, TAGLINE, SERVICES/PLANS, TRAINERS, PRICING, 
+LOCATION, CONTACT, SOCIAL LINKS, WORKING HOURS HERE]
+
+---
+
+## 🎨 DESIGN DIRECTION
+
+**Theme:** Dark premium. Aggressive energy meets high-end editorial.
+
+**Color Palette:**
+- Background: #0A0A0A
+- Surface cards: #111111
+- Borders: #1A1A1A
+- Primary accent: #E8C547 (electric gold/yellow — energy)
+- Secondary: #B8972E (deeper gold)
+- Text primary: #F5F0EB
+- Text muted: #6B6560
+- Success: #22c55e
+- Warning: #eab308
+- Danger: #ef4444
+
+**Typography:**
+- Display/headings: Bebas Neue (Google Font) — bold, athletic, impactful
+- Body: DM Sans — clean, modern, readable
+- Utility/labels/prices: DM Mono — for stats, tags, metadata
+
+**Aesthetic rules:**
+- Large whitespace — sections must breathe
+- Sharp corners everywhere — no border radius on cards or buttons
+- Thin gold lines/dividers as decorative elements
+- Hover: gold underline or border glow, no background fills
+- Ghost/outlined buttons in gold only
+- No gradients on buttons
+- Every font size follows a strict typographic scale
+
+---
+
+## 📄 PUBLIC WEBSITE — PAGES
+
+### 1. HOME PAGE
+- Full-viewport hero with gym name in large Bebas Neue, tagline, CTA
+- Subtle CSS noise texture overlay on hero background
+- Stats bar: Years Active · Members · Trainers · Classes — in DM Mono
+- "Our Philosophy" — full-width editorial statement
+- Membership Plans preview — horizontal scroll cards on mobile, grid on desktop
+- Trainers preview — 2x2 grid on desktop, single column on mobile
+- Testimonials — quote + client name only, no stars
+- Gallery strip — horizontal scroll, same as Beeba Boys pattern
+- Footer: 4-column on desktop, stacked on mobile
+
+### 2. MEMBERSHIPS PAGE
+- All plans with name, duration, price, features list
+- Each plan: name, price, duration, features, CTA button
+
+### 3. TRAINERS PAGE
+- Each trainer: photo (capped height — 300px max on mobile, aspect-ratio on desktop), name, speciality, bio, certifications
+- "Book a Session" CTA per trainer
+
+### 4. GALLERY PAGE
+- Category filter: ALL / EQUIPMENT / CLASSES / TRANSFORMATIONS
+- Masonry grid on desktop, single column on mobile
+- Lightbox on click (color images always — no grayscale effect at all)
+
+### 5. SCHEDULE PAGE
+- Weekly class schedule table
+- Filter by day and class type
+- Each class: name, trainer, time, duration, difficulty level
+
+### 6. CONTACT PAGE
+- Contact form (name, email, message) → saved to Supabase messages table
+- Working hours, address, phone, social links
+
+### 7. BOOKING PAGE (multi-step)
+- Step 1: Select membership plan OR trainer session
+- Step 2: Select trainer (single select only — one trainer per booking)
+- Step 3: Select date and time
+- Step 4: Enter name, email, phone
+- Step 5: Confirmation screen
+- Save to Supabase bookings table
+
+---
+
+## 🔐 ADMIN DASHBOARD (/admin)
+
+**Auth:** Supabase email/password auth. Protect all /admin routes.
+
+**CRITICAL LAYOUT RULES:**
+- The sidebar must have a hamburger toggle on mobile
+- Sidebar must be a floating OVERLAY on mobile (not push content)
+- Sidebar must have a visible X close button positioned absolute top-right 
+  of the sidebar panel — NOT inline with the title text to avoid overlap
+- Main content area must be full width on mobile (no ml-60 on mobile)
+- Use JS window.innerWidth for breakpoint detection (not just CSS classes) 
+  to prevent both mobile and desktop layouts from rendering simultaneously
+
+**Dashboard tabs:**
+
+### 📊 Dashboard (stats)
+- Stat cards: Total Bookings, Pending, Confirmed, Active Members, 
+  Total Plans, Trainers
+- Stats must use DM Sans font (not serif) for numbers — never Bebas Neue 
+  which renders as Roman numerals
+- Use direct count queries (fetch rows and use .length) not 
+  { count: "exact", head: true } which can be unreliable
+- 2-column grid on mobile, 3-column on desktop
+
+### 📅 Bookings Manager
+- On MOBILE: render as cards (JS isMobile check, not CSS only)
+  Each card shows: client name, phone, plan/trainer, date, time, status badge, 
+  full-width status dropdown
+- On DESKTOP: render as table with columns
+- Notes field: if booking has notes (e.g. multiple selections), 
+  show them in gold text beneath the row/card
+- Status options: Pending / Confirmed / Cancelled / Completed
+- Status changes save to Supabase immediately
+
+### 💪 Plans Manager (CRUD)
+- Cards in 2-column grid (NEVER 3-column — causes overflow on most screens)
+- Edit + Delete buttons always visible (NOT hidden behind hover — 
+  hover states are invisible on mobile touchscreens)
+- Edit opens a modal with all fields pre-filled
+- Modal uses inline styles with zIndex:9999 (not Tailwind z-classes)
+- Save updates Supabase and refreshes the list immediately
+
+### 👤 Trainers Manager (CRUD)
+- Cards in 2-column grid
+- Edit + Delete buttons always visible
+- Edit modal: name, role, bio, speciality, certifications, photo URL, active toggle
+- Photo URL field — not file upload (keep it simple)
+- Active toggle controls visibility on public site
+
+### 💬 Messages Inbox
+- List of contact form submissions
+- Mark as read / Delete
+- Unread count shown in sidebar badge
+
+### ⚙️ Settings
+- Gym name, tagline, phone, address, email, hours, social links
+- Stored in settings table, pulled dynamically on public site
+
+---
+
+## 🗄️ SUPABASE SCHEMA
+
+Run this SQL to create all tables:
+
+```sql
+create table memberships (
+  id uuid primary key default gen_random_uuid(),
+  name text not null,
+  duration text,
+  price numeric,
+  features text[],
+  popular boolean default false,
+  active boolean default true
+);
+
+create table trainers (
+  id uuid primary key default gen_random_uuid(),
+  name text not null,
+  role text,
+  bio text,
+  speciality text,
+  certifications text,
+  photo_url text,
+  years_experience int,
+  active boolean default true
+);
+
+create table bookings (
+  id uuid primary key default gen_random_uuid(),
+  client_name text,
+  client_email text,
+  client_phone text,
+  plan_id uuid references memberships(id) on delete set null,
+  trainer_id uuid references trainers(id) on delete set null,
+  appointment_date date,
+  appointment_time time,
+  status text default 'Pending',
+  notes text,
+  created_at timestamptz default now()
+);
+
+create table classes (
+  id uuid primary key default gen_random_uuid(),
+  name text,
+  trainer_id uuid references trainers(id) on delete set null,
+  day_of_week text,
+  start_time time,
+  duration_minutes int,
+  difficulty text,
+  active boolean default true
+);
+
+create table gallery (
+  id uuid primary key default gen_random_uuid(),
+  image_url text,
+  category text,
+  created_at timestamptz default now()
+);
+
+create table messages (
+  id uuid primary key default gen_random_uuid(),
+  name text,
+  email text,
+  message text,
+  read boolean default false,
+  created_at timestamptz default now()
+);
+
+create table settings (
+  key text primary key,
+  value text
+);
+```
+
+---
+
+## ⚙️ TECH STACK
+
+- React + Vite
+- Tailwind CSS with custom color palette
+- Supabase (auth + database + storage)
+- React Router v6 (or wouter)
+- React Hook Form for all forms
+- Lucide React for icons
+- Google Fonts: Bebas Neue, DM Sans, DM Mono
+
+---
+
+## 🚀 VERCEL DEPLOY READY (CRITICAL)
+
+### vercel.json (create in project root):
+{
+  "rewrites": [{ "source": "/(.*)", "destination": "/index.html" }]
+}
+
+### Environment variables — NEVER hardcode:
+VITE_SUPABASE_URL=
+VITE_SUPABASE_ANON_KEY=
+
+Reference as: import.meta.env.VITE_SUPABASE_URL
+
+### vite.config:
+- base: "/"
+- outDir: "dist"
+- Use import.meta.dirname NOT __dirname (ESM compatibility)
+- NO @replit/* plugins
+- NO PORT or BASE_PATH environment variable requirements
+
+### package.json scripts:
+"dev": "vite"
+"build": "vite build"
+"preview": "vite preview"
+
+### .gitignore must include:
+.env
+.env.local
+
+### .env.example (safe to commit):
+VITE_SUPABASE_URL=
+VITE_SUPABASE_ANON_KEY=
+
+---
+
+## 📱 MOBILE RESPONSIVENESS (CRITICAL — READ EVERY POINT)
+
+### Public site:
+- Navbar: hamburger button toggles to X icon in the SAME button position 
+  (no separate close button needed). Mobile menu is a fullscreen overlay 
+  with zIndex:1000. Header has zIndex:1001. Toggle button has zIndex:1002.
+  Menu closes on: link tap, back button, outside tap
+- Hero: text max text-5xl on mobile (not full-screen-filling)
+- All section headings: text-3xl max on mobile
+- Team/trainer photos: max-height 280px on mobile (never aspect-ratio 
+  which causes full-screen height on narrow screens)
+- Service/plan cards: single column on mobile, grid on desktop
+- Gallery: single column on mobile, masonry on desktop
+- Gallery images: ALWAYS full color — no grayscale effect anywhere
+- Footer: single column on mobile, 4-column on desktop
+- All horizontal scroll sections: snap-x, hide scrollbar, 
+  fade-out gradient mask on right edge
+
+### Admin dashboard:
+- Sidebar: floating overlay on mobile, fixed sidebar on desktop
+- Sidebar open/close: JS state (useState), not CSS only
+- Bookings view: card layout on mobile, table on desktop
+  Use JS isMobile = window.innerWidth < 768 (resize listener too)
+  NOT CSS md:hidden which can show both layouts simultaneously
+- All grids: maximum 2 columns (never 3-column on admin pages)
+- Edit/Delete buttons: always visible on cards, never hover-only
+- All modals: position fixed, zIndex 9999, inline styles not Tailwind z-classes
+- Content area: no left margin on mobile, md:ml-60 on desktop only
+- All data tables: wrap in overflow-x-auto container
+
+---
+
+## 🔌 DATA FETCHING (CRITICAL)
+
+DO NOT use any workspace API client, Express routes, or custom 
+backend hooks. Use ONLY direct Supabase queries throughout the app.
+
+Pattern for every data fetch:
+  const [data, setData] = useState<any[]>([]);
+  useEffect(() => {
+    supabase.from("table_name").select("*")
+      .then(({ data, error }) => {
+        if (error) console.error(error);
+        setData(data ?? []);
+      });
+  }, []);
+
+For admin pages that need all records (not just active ones):
+  DO NOT add .eq("active", true) filter — admin sees everything
+
+For public pages: 
+  ADD .eq("active", true) filter
+
+After any insert/update/delete: immediately re-fetch 
+the table to refresh the UI without page reload
+
+---
+
+## ✅ FINAL QUALITY CHECKLIST
+
+Before marking done, verify ALL of these:
+
+### Deploy
+- [ ] vercel.json exists with SPA rewrite rule
+- [ ] vite.config uses import.meta.dirname not __dirname
+- [ ] No @replit/* imports anywhere in source
+- [ ] No hardcoded Supabase keys — only import.meta.env vars
+- [ ] npm run build completes with zero errors
+
+### Data
+- [ ] Zero imports from any workspace API client package
+- [ ] All data comes from direct Supabase queries
+- [ ] Admin pages show ALL records (no active filter)
+- [ ] Public pages show only active records
+- [ ] After every CRUD action UI refreshes without reload
+
+### Admin Dashboard
+- [ ] Sidebar closes when nav item tapped on mobile
+- [ ] Sidebar overlay covers full screen on mobile
+- [ ] X close button does not overlap sidebar title
+- [ ] Bookings show as CARDS on mobile (JS controlled)
+- [ ] Bookings show as TABLE on desktop (JS controlled)
+- [ ] Stat card numbers use DM Sans not display font
+- [ ] All Edit/Delete buttons visible without hover
+- [ ] All modals use zIndex:9999 inline style
+- [ ] No horizontal scrollbar on any admin page
+- [ ] Maximum 2-column grid on all admin pages
+
+### Mobile Public Site
+- [ ] Navbar menu closes after any link tap
+- [ ] Navbar menu is solid background (not transparent)
+- [ ] Trainer photos max 280px height on mobile
+- [ ] No grayscale on any image (gallery or team)
+- [ ] All text readable at 390px viewport width
+- [ ] Footer stacks to single column on mobile
+- [ ] No horizontal overflow on any public page
+
+Ask me for Supabase URL and anon key before connecting. 
+Build page by page starting with the home page.
