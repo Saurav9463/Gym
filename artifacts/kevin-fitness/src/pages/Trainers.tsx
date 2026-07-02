@@ -3,8 +3,10 @@ import { Link } from "wouter";
 import { motion } from "framer-motion";
 import { supabase } from "@/lib/supabase";
 import { Award, Clock, Instagram, ArrowRight } from "lucide-react";
-import gym1 from "@assets/image_1782887751159.png";
-import gym3 from "@assets/image_1782887768921.png";
+import photoKevin from "@assets/trainer-kevin.png";
+import photoPriya from "@assets/trainer-priya.png";
+import photoRahul from "@assets/trainer-rahul.png";
+import photoAnita from "@assets/trainer-anita.png";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 40 },
@@ -20,10 +22,10 @@ export default function Trainers() {
   useEffect(() => {
     supabase.from("trainers").select("*").eq("active", true).then(({ data }) => {
       setTrainers(data && data.length > 0 ? data : [
-        { id: 1, name: "Kevin Singh", role: "Head Trainer", speciality: "Strength & Conditioning", bio: "Founder and head trainer with a passion for transforming lives through heavy lifting and discipline.", certifications: "Advanced Strength Training, Sports Nutrition", photo_url: gym1, years_experience: 8 },
-        { id: 2, name: "Priya Sharma", role: "Yoga & Flexibility", speciality: "Functional Fitness", bio: "Dedicated to improving mobility, core strength, and mental wellness through dynamic yoga flows.", certifications: "Certified Yoga Instructor", photo_url: gym3, years_experience: 5 },
-        { id: 3, name: "Rahul Verma", role: "Cardio Specialist", speciality: "HIIT & Endurance", bio: "High energy coach focusing on cardiovascular health and fat loss through intense interval training.", certifications: "HIIT Certified, Nutrition Counselor", photo_url: null, years_experience: 6 },
-        { id: 4, name: "Anita Kaur", role: "Weight Loss Expert", speciality: "Weight Management", bio: "Helping clients achieve sustainable weight loss through engaging routines and balanced nutrition.", certifications: "Zumba Certified, Nutrition Expert", photo_url: null, years_experience: 4 },
+        { id: 1, name: "Kevin Singh", role: "Head Trainer", speciality: "Strength & Conditioning", bio: "Founder and head trainer with a passion for transforming lives through heavy lifting and discipline.", certifications: "Advanced Strength Training, Sports Nutrition", photo_url: photoKevin, years_experience: 8 },
+        { id: 2, name: "Priya Sharma", role: "Yoga & Flexibility", speciality: "Functional Fitness", bio: "Dedicated to improving mobility, core strength, and mental wellness through dynamic yoga flows.", certifications: "Certified Yoga Instructor", photo_url: photoPriya, years_experience: 5 },
+        { id: 3, name: "Rahul Verma", role: "Cardio Specialist", speciality: "HIIT & Endurance", bio: "High energy coach focusing on cardiovascular health and fat loss through intense interval training.", certifications: "HIIT Certified, Nutrition Counselor", photo_url: photoRahul, years_experience: 6 },
+        { id: 4, name: "Anita Kaur", role: "Weight Loss Expert", speciality: "Weight Management", bio: "Helping clients achieve sustainable weight loss through engaging routines and balanced nutrition.", certifications: "Zumba Certified, Nutrition Expert", photo_url: photoAnita, years_experience: 4 },
       ]);
     });
   }, []);

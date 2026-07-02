@@ -9,6 +9,10 @@ import gym1 from "@assets/image_1782887751159.png";
 import gym2 from "@assets/image_1782887762372.png";
 import gym3 from "@assets/image_1782887768921.png";
 import gym4 from "@assets/image_1782887774610.png";
+import photoKevin from "@assets/trainer-kevin.png";
+import photoPriya from "@assets/trainer-priya.png";
+import photoRahul from "@assets/trainer-rahul.png";
+import photoAnita from "@assets/trainer-anita.png";
 
 /* ── Animated Counter ── */
 function Counter({ target, suffix = "", prefix = "" }: { target: number; suffix?: string; prefix?: string }) {
@@ -207,10 +211,10 @@ export default function Home() {
     { id: 4, name: "Annual", price: 9000, duration: "year", features: ["All-inclusive access", "Unlimited trainer sessions", "VIP perks"] },
   ];
   const fallbackTrainers = [
-    { id: 1, name: "Kevin Singh", role: "Head Trainer", speciality: "Strength & Conditioning", photo_url: gym1 },
-    { id: 2, name: "Priya Sharma", role: "Yoga Expert", speciality: "Yoga & Flexibility", photo_url: gym3 },
-    { id: 3, name: "Rahul Verma", role: "Cardio Specialist", speciality: "HIIT & Endurance", photo_url: gym2 },
-    { id: 4, name: "Anita Kaur", role: "Weight Loss Expert", speciality: "Weight Management", photo_url: gym4 },
+    { id: 1, name: "Kevin Singh", role: "Head Trainer", speciality: "Strength & Conditioning", photo_url: photoKevin },
+    { id: 2, name: "Priya Sharma", role: "Yoga Expert", speciality: "Yoga & Flexibility", photo_url: photoPriya },
+    { id: 3, name: "Rahul Verma", role: "Cardio Specialist", speciality: "HIIT & Endurance", photo_url: photoRahul },
+    { id: 4, name: "Anita Kaur", role: "Weight Loss Expert", speciality: "Weight Management", photo_url: photoAnita },
   ];
 
   const displayPlans    = plans.length > 0 ? plans : fallbackPlans;
