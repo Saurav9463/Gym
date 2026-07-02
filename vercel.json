@@ -1,4 +1,6 @@
 {
-  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "buildCommand": "pnpm --filter @workspace/kevin-fitness build",
+  "installCommand": "pnpm install",
+  "outputDirectory": "artifacts/kevin-fitness/dist/public",
   "rewrites": [{ "source": "/(.*)", "destination": "/index.html" }]
 }
