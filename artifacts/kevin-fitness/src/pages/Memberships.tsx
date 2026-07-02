@@ -4,143 +4,339 @@ import { motion } from "framer-motion";
 
 const BZ: [number, number, number, number] = [0.22, 1, 0.36, 1];
 import { supabase } from "@/lib/supabase";
-import { Check, Zap } from "lucide-react";
+import { Check, ArrowRight, Zap } from "lucide-react";
 
-const fadeUp = {
-  hidden: { opacity: 0, y: 30 },
-  visible: (i: number) => ({ opacity: 1, y: 0, transition: { delay: i * 0.1, duration: 0.5, ease: BZ } }),
-};
+const fadeUp = (delay = 0) => ({
+  hidden: { opacity: 0, y: 25 },
+  visible: { opacity: 1, y: 0, transition: { delay, duration: 0.55, ease: BZ } },
+});
 
 export default function Memberships() {
   const [plans, setPlans] = useState<any[]>([]);
 
   useEffect(() => {
-    supabase.from("memberships").select("*").eq("active", true).order("price").then(({ data }) => {
-      setPlans(data && data.length > 0 ? data : [
-        { id: 1, name: "Monthly", price: 1200, duration: "month", features: ["Weight training", "Cardio equipment", "Locker room access", "Basic diet tips"], popular: false },
-        { id: 2, name: "Quarterly", price: 3200, duration: "3 months", features: ["Everything in Monthly", "Personalised diet guidance", "Priority class booking", "Progress tracking"], popular: true },
-        { id: 3, name: "Half-Yearly", price: 5500, duration: "6 months", features: ["Everything in Quarterly", "1 trainer session / month", "Body composition analysis", "Nutritional counseling"], popular: false },
-        { id: 4, name: "Annual", price: 9000, duration: "year", features: ["All-inclusive access", "Unlimited trainer sessions", "Priority trainer access", "Full body analysis", "VIP member perks"], popular: false },
-      ]);
-    });
+    supabase
+      .from("memberships")
+      .select("*")
+      .eq("active", true)
+      .order("price")
+      .then(({ data }) => {
+        setPlans(
+          data && data.length > 0
+            ? data
+            : [
+                {
+                  id: 1,
+                  name: "Basic",
+                  price: 1200,
+                  duration: "month",
+                  features: [
+                    "Unlimited access to the gym",
+                    "1 free group class per month",
+                    "Free access to relaxation areas",
+                  ],
+                  popular: false,
+                },
+                {
+                  id: 2,
+                  name: "Standard",
+                  price: 3200,
+                  duration: "3 months",
+                  features: [
+                    "Unlimited access to the gym",
+                    "3 free group classes per month",
+                    "Free access to relaxation areas and sauna",
+                    "Personalised diet guidance",
+                    "Progress tracking",
+                  ],
+                  popular: true,
+                },
+                {
+                  id: 3,
+                  name: "Premium",
+                  price: 5500,
+                  duration: "6 months",
+                  features: [
+                    "Unlimited access to the gym",
+                    "Unlimited group classes",
+                    "2 personal training sessions per month",
+                    "Free access to all amenities",
+                    "Body composition analysis",
+                  ],
+                  popular: false,
+                },
+                {
+                  id: 4,
+                  name: "Elite",
+                  price: 9000,
+                  duration: "year",
+                  features: [
+                    "All-inclusive access",
+                    "Unlimited trainer sessions",
+                    "Priority trainer access",
+                    "Full body analysis monthly",
+                    "VIP member perks",
+                  ],
+                  popular: false,
+                },
+              ]
+        );
+      });
   }, []);
 
+  // Guarantee a featured plan: prefer popular flag, else force index 1
+  const displayPlans = plans
+    .slice(0, 3)
+    .map((p, i, arr) => ({
+      ...p,
+      _featured: p.popular || (!arr.some((x: any) => x.popular) && i === 1),
+    }));
+
   return (
-    <div className="min-h-[80vh] bg-depth-0">
-      {/* Header */}
-      <div className="bg-depth-3 section-pad">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+    <div className="min-h-[80vh]" style={{ background: "#0d0a08" }}>
+
+      {/* ── Header ── */}
+      <section className="pt-28 pb-16 sm:pt-36 sm:pb-20 relative overflow-hidden" style={{ background: "#111113" }}>
+        <div
+          className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] rounded-full pointer-events-none blur-3xl opacity-20"
+          style={{ background: "hsl(var(--primary))" }}
+        />
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
           <motion.span
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
-            className="inline-block font-mono text-[10px] sm:text-xs tracking-[0.4em] text-primary uppercase mb-5 border border-primary/30 px-4 py-1.5"
+            className="text-primary text-sm font-semibold block mb-4"
           >
-            Pricing
+            Subscriptions
           </motion.span>
           <motion.h1
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.1 }}
-            className="font-display mb-4"
-            style={{ fontSize: "clamp(2.5rem, 8vw, 6rem)" }}
+            transition={{ delay: 0.08 }}
+            className="text-white mb-4 leading-tight"
+            style={{ fontSize: "clamp(2rem, 6vw, 5rem)", fontWeight: 800, letterSpacing: "-0.025em", textTransform: "none" }}
           >
-            Choose Your <span className="text-primary italic">Weapon</span>
+            FLEXIBLE <span className="text-primary">PLANS</span> FOR EVERY GOAL
           </motion.h1>
-          <motion.div
-            initial={{ scaleX: 0 }}
-            animate={{ scaleX: 1 }}
-            transition={{ delay: 0.2, duration: 0.5 }}
-            className="w-16 sm:w-20 h-[2px] bg-primary mx-auto mb-6 origin-left"
-          />
           <motion.p
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ delay: 0.3 }}
-            className="text-white/50 text-sm sm:text-base max-w-xl mx-auto"
+            transition={{ delay: 0.2 }}
+            className="text-white/50 text-base sm:text-lg max-w-xl mx-auto leading-relaxed"
           >
-            No hidden fees. No complicated contracts. Just results.
+            Choose the plan that fits your lifestyle. Every membership includes full access to
+            our premium facilities, certified trainers, and a welcoming community.
           </motion.p>
         </div>
-      </div>
+      </section>
 
-      {/* Plans */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24">
-        <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4 sm:gap-6">
-          {plans.map((plan, i) => (
+      {/* ── Plans Grid ── */}
+      <section className="py-16 sm:py-20 lg:py-24">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-5 sm:gap-6">
+            {displayPlans.map((plan, i) => {
+              const featured = plan.popular || (plans.length === 0 && i === 1);
+              return (
+                <motion.div
+                  key={plan.id}
+                  initial="hidden"
+                  whileInView="visible"
+                  viewport={{ once: true }}
+                  variants={fadeUp(i * 0.12)}
+                  className="relative rounded-2xl p-6 sm:p-8 flex flex-col"
+                  style={
+                    featured
+                      ? { background: "hsl(var(--primary))" }
+                      : { background: "#1a1715", border: "1px solid rgba(255,255,255,0.08)" }
+                  }
+                >
+                  {featured && (
+                    <div className="absolute -top-3 left-1/2 -translate-x-1/2">
+                      <span className="bg-white text-primary text-[10px] font-bold tracking-widest uppercase px-4 py-1.5 rounded-full">
+                        ★ Most Popular
+                      </span>
+                    </div>
+                  )}
+
+                  <div className={featured ? "pt-3" : ""}>
+                    <h3 className="font-bold text-xl text-white mb-3">{plan.name}</h3>
+                    <div className="mb-1 flex items-baseline gap-1">
+                      <span
+                        className="font-black text-5xl text-white"
+                        style={{ fontFamily: "var(--font-display)", letterSpacing: "-0.02em" }}
+                      >
+                        ₹{plan.price.toLocaleString()}
+                      </span>
+                      <span className={`text-sm ml-1 ${featured ? "text-white/60" : "text-white/35"}`}>
+                        /{plan.duration}
+                      </span>
+                    </div>
+                    <p
+                      className={`text-xs mb-6 pb-6 border-b ${
+                        featured ? "text-white/60 border-white/20" : "text-white/35 border-white/8"
+                      }`}
+                    >
+                      {i === 0
+                        ? "Essential package for regular workouts"
+                        : i === 1
+                        ? "Extended package for comprehensive training"
+                        : "Deluxe package with maximum benefits"}
+                    </p>
+
+                    <p
+                      className={`text-[10px] font-semibold tracking-[0.15em] uppercase mb-4 ${
+                        featured ? "text-white/65" : "text-white/35"
+                      }`}
+                    >
+                      WHAT YOU GET
+                    </p>
+                    <ul className="space-y-3 mb-8 flex-1">
+                      {plan.features?.map((f: string, j: number) => (
+                        <li
+                          key={j}
+                          className={`flex items-start gap-3 text-sm leading-relaxed ${
+                            featured ? "text-white/90" : "text-white/60"
+                          }`}
+                        >
+                          <Check
+                            className={`w-4 h-4 shrink-0 mt-0.5 ${
+                              featured ? "text-white" : "text-primary"
+                            }`}
+                          />
+                          {f}
+                        </li>
+                      ))}
+                    </ul>
+
+                    <Link
+                      href={`/book?plan=${plan.id}`}
+                      className={`w-full py-4 rounded-xl text-center font-semibold text-sm flex items-center justify-center gap-2 transition-all ${
+                        featured
+                          ? "bg-white/15 text-white hover:bg-white/25 border border-white/25"
+                          : "border border-white/15 text-white/70 hover:border-primary hover:text-primary"
+                      }`}
+                    >
+                      Get started <ArrowRight className="w-4 h-4" />
+                    </Link>
+                  </div>
+                </motion.div>
+              );
+            })}
+          </div>
+
+          {/* 4th plan if exists (Elite / Annual) */}
+          {plans.length > 3 && (
             <motion.div
-              key={plan.id}
-              custom={i}
               initial="hidden"
               whileInView="visible"
-              viewport={{ once: true, margin: "-50px" }}
-              variants={fadeUp}
-              className={`relative flex flex-col ${
-                plan.popular
-                  ? "gradient-border-card"
-                  : "glass-card border border-white/6"
-              } p-6 sm:p-7`}
+              viewport={{ once: true }}
+              variants={fadeUp(0.1)}
+              className="mt-5 rounded-2xl p-6 sm:p-8 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6"
+              style={{ background: "#1a1715", border: "1px solid rgba(255,255,255,0.08)" }}
             >
-              {/* Popular badge */}
-              {plan.popular && (
-                <div className="absolute -top-px left-0 right-0 flex justify-center">
-                  <div className="bg-primary px-4 py-1 flex items-center gap-1.5">
-                    <Zap className="w-3 h-3 text-white fill-current" />
-                    <span className="font-mono text-[9px] text-white font-bold tracking-widest uppercase">Most Popular</span>
-                  </div>
+              <div className="flex items-center gap-4">
+                <div className="w-12 h-12 bg-primary/15 rounded-xl flex items-center justify-center shrink-0">
+                  <Zap className="w-6 h-6 text-primary" />
                 </div>
-              )}
-
-              <div className={plan.popular ? "pt-4" : ""}>
-                {/* Plan name */}
-                <h3 className="font-display text-2xl sm:text-3xl text-white mb-4">{plan.name}</h3>
-
-                {/* Price */}
-                <div className="mb-6 pb-6 border-b border-white/8">
-                  <div className="flex items-baseline gap-2">
-                    <span className="font-display text-5xl sm:text-6xl text-primary"
-                      style={{ textShadow: "0 0 30px rgba(225,29,72,0.35)" }}>
-                      ₹{plan.price.toLocaleString()}
-                    </span>
-                  </div>
-                  <span className="text-white/35 text-xs font-mono tracking-widest uppercase mt-1 block">
-                    per {plan.duration}
-                  </span>
+                <div>
+                  <h3 className="font-bold text-xl text-white mb-1">{plans[3].name}</h3>
+                  <p className="text-white/45 text-sm">
+                    ₹{plans[3].price.toLocaleString()}/{plans[3].duration} · All-inclusive VIP access
+                  </p>
                 </div>
-
-                {/* Features */}
-                <ul className="space-y-3 mb-8 flex-1">
-                  {plan.features?.map((f: string, j: number) => (
-                    <li key={j} className="flex items-start gap-3 text-sm text-white/60 leading-snug">
-                      <Check className="w-4 h-4 text-primary shrink-0 mt-0.5" />
-                      {f}
-                    </li>
-                  ))}
-                </ul>
-
-                <Link
-                  href={`/book?plan=${plan.id}`}
-                  className={`block w-full py-4 text-center font-display text-sm tracking-widest uppercase transition-all min-h-[52px] flex items-center justify-center ${
-                    plan.popular
-                      ? "btn-primary"
-                      : "ghost-gold-btn"
-                  }`}
-                >
-                  Select Plan
-                </Link>
               </div>
+              <div className="flex flex-wrap gap-2 flex-1 sm:justify-center">
+                {plans[3].features?.slice(0, 3).map((f: string, j: number) => (
+                  <span key={j} className="flex items-center gap-1.5 text-xs text-white/55">
+                    <Check className="w-3.5 h-3.5 text-primary shrink-0" /> {f}
+                  </span>
+                ))}
+              </div>
+              <Link
+                href={`/book?plan=${plans[3].id}`}
+                className="shrink-0 px-6 py-3 rounded-full border border-primary text-primary font-semibold text-sm hover:bg-primary hover:text-white transition-all"
+              >
+                Get started
+              </Link>
             </motion.div>
-          ))}
+          )}
         </div>
+      </section>
 
-        <motion.p
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          className="text-center text-white/25 text-xs font-mono tracking-widest mt-10 sm:mt-14"
-        >
-          All plans · No joining fee · Cancel anytime
-        </motion.p>
-      </div>
+      {/* ── Why Kevin Fitness ── */}
+      <section className="py-16 sm:py-20 border-t border-white/5" style={{ background: "#111113" }}>
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={fadeUp()}
+            className="text-center mb-12"
+          >
+            <span className="text-primary text-sm font-semibold block mb-4">Why Kevin Fitness?</span>
+            <h2
+              className="text-white leading-tight"
+              style={{ fontSize: "clamp(1.6rem, 3.5vw, 2.8rem)", fontWeight: 800, letterSpacing: "-0.02em" }}
+            >
+              Every Plan Includes These <span className="text-primary">Essentials</span>
+            </h2>
+          </motion.div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+            {[
+              { icon: "🏋️", title: "Premium Equipment", desc: "Latest cardio machines, free weights, and functional training gear — all maintained daily." },
+              { icon: "👥", title: "Expert Trainers", desc: "Certified coaches with years of experience to guide your form, progress, and nutrition." },
+              { icon: "📅", title: "Open Every Day", desc: "6 AM to 10 PM, seven days a week. Train on your schedule, not ours." },
+              { icon: "🎯", title: "Personalised Plans", desc: "Custom workout and diet programs designed specifically for your goals." },
+              { icon: "🔒", title: "Safe Environment", desc: "Clean, well-maintained facilities with CCTV, secure lockers, and professional hygiene standards." },
+              { icon: "📊", title: "Progress Tracking", desc: "Regular assessments to measure your progress and adjust your program for best results." },
+            ].map((item, i) => (
+              <motion.div
+                key={i}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true }}
+                variants={fadeUp(i * 0.07)}
+                className="rounded-xl p-5 sm:p-6 border border-white/8"
+                style={{ background: "#1a1715" }}
+              >
+                <span className="text-2xl mb-4 block">{item.icon}</span>
+                <h3
+                  className="text-white font-bold text-base mb-2"
+                  style={{ fontFamily: "var(--font-sans)", letterSpacing: "normal" }}
+                >
+                  {item.title}
+                </h3>
+                <p className="text-white/50 text-sm leading-relaxed">{item.desc}</p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── CTA ── */}
+      <section className="py-16 sm:py-20" style={{ background: "#0d0a08" }}>
+        <div className="max-w-2xl mx-auto px-4 text-center">
+          <h2
+            className="text-white mb-4 leading-tight"
+            style={{ fontSize: "clamp(1.6rem, 3.5vw, 2.8rem)", fontWeight: 800, letterSpacing: "-0.02em", textTransform: "none" }}
+          >
+            Not sure which plan is right for you?
+          </h2>
+          <p className="text-white/50 text-base mb-8 leading-relaxed">
+            Visit us for a free trial session. Our trainers will assess your goals and recommend
+            the perfect plan for you.
+          </p>
+          <div className="flex flex-col sm:flex-row gap-3 justify-center">
+            <Link href="/contact" className="pill-btn-primary">
+              Get Free Consultation <ArrowRight className="w-4 h-4" />
+            </Link>
+            <Link href="/schedule" className="pill-btn-ghost">
+              View Class Schedule
+            </Link>
+          </div>
+        </div>
+      </section>
     </div>
   );
 }
