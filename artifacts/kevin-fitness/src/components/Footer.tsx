@@ -67,6 +67,12 @@ export default function Footer() {
 
         <div className="pt-8 border-t border-border text-center text-sm text-muted-foreground font-mono">
           <p>&copy; {new Date().getFullYear()} Kevin Fitness. All rights reserved.</p>
+          <Link
+            href="/admin/login"
+            className="inline-block mt-2 text-[10px] text-muted-foreground/40 hover:text-primary transition-colors uppercase tracking-widest"
+          >
+            Admin Login
+          </Link>
         </div>
       </div>
     </footer>
