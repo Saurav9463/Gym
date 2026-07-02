@@ -1,0 +1,25 @@
+Redesign the visual style of the Kevin Fitness site (artifacts/kevin-fitness) to match a more premium, modern gym-website aesthetic, while keeping all existing functionality, routes, Supabase data-fetching, and the admin dashboard exactly as they are — this is a visual/styling pass only, not a rebuild.
+Color & theme:
+
+Replace the current black + dull yellow scheme with a deep charcoal/near-black background (#0a0a0a–#121212) and ONE strong accent color — a vivid orange (#FF5A1F-ish) or keep our yellow but make it more saturated and used more sparingly, only on CTAs, active states, and key numbers/highlights.
+Everything else stays neutral: white/off-white headings, gray body text, subtle borders.
+
+Hero section (Home.tsx):
+
+Full-bleed, large action-photo of a person mid-workout on the right or as a background with a dark gradient overlay on the left for text legibility.
+Big bold headline (2 lines max), short subtext, two CTA buttons side by side ("Join Now" primary filled, "Watch Video" or "View Schedule" ghost/outline with a play or arrow icon).
+Small trust row under the CTAs: a cluster of overlapping circular member avatars + star rating + "X,XXX+ members" style stat, pulling the member count from a settings value if one exists, otherwise a static placeholder.
+
+Stats bar: a horizontal row of 3–4 big bold numbers with small labels underneath (e.g. "8+ Years of Excellence", "500+ Members", "20+ Weekly Classes", "4 Expert Trainers" — pull trainer count dynamically from the trainers table where possible).
+Services / classes section: convert into a horizontally-scrollable or grid row of image cards (photo background, dark gradient at bottom, label + arrow icon overlay), one per class/service category — reuse our existing class/schedule data instead of inventing new categories.
+"Why choose us" section: alternating image + feature-list layout, image on one side, expandable/accordion-style feature rows on the other (icon + bold title + short description), consistent with our existing content (trainers, equipment, hours) — no new copy that isn't true for our gym.
+Pricing / memberships section: redesign Memberships.tsx cards into a 3-column card layout with the middle/popular plan visually elevated (larger, accent-colored border or background), clear price + billing period, checklist of features with checkmark icons, single CTA button per card — keep pulling this from the memberships Supabase table, don't hardcode.
+General polish:
+
+Add subtle scroll-reveal/fade-in animations on section entry (framer-motion if already installed, otherwise a lightweight CSS intersection-observer approach).
+Consistent rounded-corner radius and card elevation/shadow language across all sections.
+Make sure everything stays fully responsive on mobile — stack the multi-column sections cleanly.
+
+Imagery: don't scrape or hotlink images from any external design showcase site. Either generate new AI photography in a consistent style (athletic, moody lighting, dark background, matches our black/accent theme) or source properly licensed stock photos, and save them into attached_assets the same way existing images are handled.
+Do not touch the Supabase schema, the admin dashboard pages, the booking flow logic, or routing — this is purely the visual layer on top of existing pages and data.
+
