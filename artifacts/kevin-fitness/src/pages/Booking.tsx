@@ -180,7 +180,7 @@ export default function Booking() {
               <div className="pt-4 flex justify-end">
                 <button
                   onClick={handleNext}
-                  className="bg-primary text-black font-display tracking-widest uppercase px-6 sm:px-8 py-3.5 hover:bg-white transition-colors flex items-center gap-2 min-h-[52px]"
+                  className="bg-primary text-white font-display tracking-widest uppercase px-6 sm:px-8 py-3.5 hover:bg-white transition-colors flex items-center gap-2 min-h-[52px]"
                 >
                   Continue <ChevronRight className="w-4 h-4 sm:w-5 sm:h-5" />
                 </button>
@@ -239,7 +239,7 @@ export default function Booking() {
                 </button>
                 <button
                   onClick={handleNext}
-                  className="bg-primary text-black font-display tracking-widest uppercase px-6 sm:px-8 py-3.5 hover:bg-white transition-colors flex items-center gap-2 min-h-[52px]"
+                  className="bg-primary text-white font-display tracking-widest uppercase px-6 sm:px-8 py-3.5 hover:bg-white transition-colors flex items-center gap-2 min-h-[52px]"
                 >
                   Continue <ChevronRight className="w-4 h-4 sm:w-5 sm:h-5" />
                 </button>
@@ -281,7 +281,7 @@ export default function Booking() {
                       onClick={() => setFormData({ ...formData, time })}
                       className={`py-3 sm:py-3.5 text-xs sm:text-sm font-mono tracking-wider transition-colors border min-h-[48px] ${
                         formData.time === time
-                          ? "bg-primary border-primary text-black"
+                          ? "bg-primary border-primary text-white"
                           : "border-border text-foreground hover:border-primary/50"
                       }`}
                     >
@@ -298,7 +298,7 @@ export default function Booking() {
                 <button
                   onClick={handleNext}
                   disabled={!formData.date || !formData.time}
-                  className="bg-primary text-black font-display tracking-widest uppercase px-6 sm:px-8 py-3.5 hover:bg-white transition-colors flex items-center gap-2 disabled:opacity-50 min-h-[52px]"
+                  className="bg-primary text-white font-display tracking-widest uppercase px-6 sm:px-8 py-3.5 hover:bg-white transition-colors flex items-center gap-2 disabled:opacity-50 min-h-[52px]"
                 >
                   Continue <ChevronRight className="w-4 h-4 sm:w-5 sm:h-5" />
                 </button>
@@ -358,7 +358,7 @@ export default function Booking() {
                 <button
                   onClick={handleSubmit}
                   disabled={loading || !formData.name || !formData.email || !formData.phone}
-                  className="bg-primary text-black font-display tracking-widest uppercase px-6 sm:px-8 py-3.5 hover:bg-white transition-colors flex items-center justify-center gap-2 disabled:opacity-50 min-h-[52px] flex-1 xs:flex-none"
+                  className="bg-primary text-white font-display tracking-widest uppercase px-6 sm:px-8 py-3.5 hover:bg-white transition-colors flex items-center justify-center gap-2 disabled:opacity-50 min-h-[52px] flex-1 xs:flex-none"
                 >
                   {loading ? "Submitting…" : "Confirm Booking"}
                   {!loading && <ChevronRight className="w-4 h-4 sm:w-5 sm:h-5" />}

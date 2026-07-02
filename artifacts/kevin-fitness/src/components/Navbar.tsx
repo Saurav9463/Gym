@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Link, useLocation } from "wouter";
 import { Menu, X, Dumbbell } from "lucide-react";
 
@@ -6,11 +6,20 @@ export default function Navbar() {
   const [location] = useLocation();
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [scrollProgress, setScrollProgress] = useState(0);
+  const progressRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => { setIsOpen(false); }, [location]);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 30);
+    const onScroll = () => {
+      const scrollY = window.scrollY;
+      setScrolled(scrollY > 30);
+
+      // Scroll progress
+      const docH = document.documentElement.scrollHeight - window.innerHeight;
+      setScrollProgress(docH > 0 ? Math.min((scrollY / docH) * 100, 100) : 0);
+    };
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
@@ -34,15 +43,24 @@ export default function Navbar() {
       <nav
         className={`fixed top-0 w-full z-[1001] transition-all duration-500 ${
           scrolled || isOpen
-            ? "bg-black/95 backdrop-blur-xl border-b border-white/5 shadow-[0_4px_30px_rgba(0,0,0,0.5)]"
-            : "bg-transparent border-b border-transparent"
+            ? "bg-black/80 backdrop-blur-2xl border-b border-white/[0.06] shadow-[0_4px_40px_rgba(0,0,0,0.6)]"
+            : "bg-gradient-to-b from-black/50 to-transparent backdrop-blur-sm border-b border-transparent"
         }`}
       >
+        {/* Scroll progress bar */}
+        <div
+          className="absolute top-0 left-0 h-[2px] bg-primary transition-all duration-100 z-50"
+          style={{ width: `${scrollProgress}%`, boxShadow: "0 0 12px rgba(225,29,72,0.8), 0 0 4px rgba(225,29,72,0.5)" }}
+        />
+
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between h-16 sm:h-20 items-center">
             {/* Logo */}
-            <Link href="/" className="flex items-center gap-2 group shrink-0">
-              <Dumbbell className="text-primary w-6 h-6 group-hover:rotate-12 transition-transform duration-300" />
+            <Link href="/" className="flex items-center gap-2.5 group shrink-0">
+              <div className="relative">
+                <Dumbbell className="text-primary w-6 h-6 group-hover:rotate-12 transition-transform duration-300" />
+                <div className="absolute inset-0 bg-primary/20 blur-md rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+              </div>
               <span className="font-display text-xl sm:text-2xl tracking-wider text-white">
                 KEVIN<span className="text-primary">FITNESS</span>
               </span>
@@ -55,7 +73,7 @@ export default function Navbar() {
                   key={link.path}
                   href={link.path}
                   className={`nav-link-underline text-[11px] lg:text-xs font-medium tracking-[0.15em] uppercase transition-colors duration-200 ${
-                    location === link.path ? "text-primary active" : "text-white/70 hover:text-white"
+                    location === link.path ? "text-primary active" : "text-white/60 hover:text-white"
                   }`}
                 >
                   {link.name}
@@ -63,7 +81,7 @@ export default function Navbar() {
               ))}
               <Link
                 href="/book"
-                className="ml-2 px-5 py-2.5 bg-primary text-black font-display text-sm tracking-widest uppercase hover:bg-white transition-all duration-300 min-h-[44px] flex items-center hover:shadow-[0_0_20px_rgba(245,200,0,0.4)] hover:-translate-y-0.5"
+                className="ml-2 px-5 py-2.5 bg-primary text-white font-display text-sm tracking-widest uppercase transition-all duration-300 min-h-[44px] flex items-center hover:shadow-[0_0_24px_rgba(225,29,72,0.55)] hover:-translate-y-0.5 hover:brightness-110 active:translate-y-0"
               >
                 Join Now
               </Link>
@@ -84,7 +102,9 @@ export default function Navbar() {
 
       {/* Mobile Overlay */}
       {isOpen && (
-        <div className="mobile-menu-open fixed inset-0 z-[1000] bg-black/98 backdrop-blur-xl flex flex-col overflow-y-auto">
+        <div className="mobile-menu-open fixed inset-0 z-[1000] bg-black/98 backdrop-blur-2xl flex flex-col overflow-y-auto">
+          {/* Subtle red glow top */}
+          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-80 h-40 bg-primary/10 blur-3xl pointer-events-none" />
           <div className="pt-16 sm:pt-20" />
           <div className="flex flex-col items-center justify-center flex-1 py-10 space-y-1 px-6">
             {navLinks.map((link, i) => (
@@ -101,7 +121,7 @@ export default function Navbar() {
             ))}
             <Link
               href="/book"
-              className="mt-8 w-full py-5 bg-primary text-black text-2xl font-display tracking-widest uppercase text-center hover:bg-white transition-all min-h-[56px] flex items-center justify-center"
+              className="mt-8 w-full py-5 bg-primary text-white text-2xl font-display tracking-widest uppercase text-center hover:brightness-110 transition-all min-h-[56px] flex items-center justify-center shadow-[0_0_30px_rgba(225,29,72,0.4)]"
             >
               Join Now
             </Link>

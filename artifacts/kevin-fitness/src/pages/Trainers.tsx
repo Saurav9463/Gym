@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 import { Link } from "wouter";
 import { motion } from "framer-motion";
+
+const BZ: [number, number, number, number] = [0.22, 1, 0.36, 1];
 import { supabase } from "@/lib/supabase";
 import { Award, Clock, Instagram, ArrowRight } from "lucide-react";
 import photoKevin from "@assets/trainer-kevin.png";
@@ -12,7 +14,7 @@ const fadeUp = {
   hidden: { opacity: 0, y: 40 },
   visible: (i: number) => ({
     opacity: 1, y: 0,
-    transition: { delay: i * 0.12, duration: 0.6, ease: [0.22, 1, 0.36, 1] },
+    transition: { delay: i * 0.12, duration: 0.6, ease: BZ },
   }),
 };
 
@@ -85,7 +87,7 @@ export default function Trainers() {
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent sm:bg-gradient-to-r sm:from-black/70 sm:via-black/10 sm:to-transparent opacity-60 group-hover:opacity-80 transition-opacity duration-500" />
                 {/* Years badge */}
                 <div className="absolute top-3 left-3 bg-primary px-2 py-1">
-                  <span className="font-mono text-[9px] text-black font-bold tracking-widest uppercase">
+                  <span className="font-mono text-[9px] text-white font-bold tracking-widest uppercase">
                     {trainer.years_experience}+ Yrs
                   </span>
                 </div>

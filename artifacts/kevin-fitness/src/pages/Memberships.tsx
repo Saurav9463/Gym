@@ -1,12 +1,14 @@
 import { useState, useEffect } from "react";
 import { Link } from "wouter";
 import { motion } from "framer-motion";
+
+const BZ: [number, number, number, number] = [0.22, 1, 0.36, 1];
 import { supabase } from "@/lib/supabase";
 import { Check, Zap } from "lucide-react";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 30 },
-  visible: (i: number) => ({ opacity: 1, y: 0, transition: { delay: i * 0.1, duration: 0.5, ease: [0.22, 1, 0.36, 1] } }),
+  visible: (i: number) => ({ opacity: 1, y: 0, transition: { delay: i * 0.1, duration: 0.5, ease: BZ } }),
 };
 
 export default function Memberships() {
@@ -82,8 +84,8 @@ export default function Memberships() {
               {plan.popular && (
                 <div className="absolute -top-px left-0 right-0 flex justify-center">
                   <div className="bg-primary px-4 py-1 flex items-center gap-1.5">
-                    <Zap className="w-3 h-3 text-black fill-current" />
-                    <span className="font-mono text-[9px] text-black font-bold tracking-widest uppercase">Most Popular</span>
+                    <Zap className="w-3 h-3 text-white fill-current" />
+                    <span className="font-mono text-[9px] text-white font-bold tracking-widest uppercase">Most Popular</span>
                   </div>
                 </div>
               )}
@@ -96,7 +98,7 @@ export default function Memberships() {
                 <div className="mb-6 pb-6 border-b border-white/8">
                   <div className="flex items-baseline gap-2">
                     <span className="font-display text-5xl sm:text-6xl text-primary"
-                      style={{ textShadow: "0 0 30px rgba(245,200,0,0.3)" }}>
+                      style={{ textShadow: "0 0 30px rgba(225,29,72,0.35)" }}>
                       ₹{plan.price.toLocaleString()}
                     </span>
                   </div>

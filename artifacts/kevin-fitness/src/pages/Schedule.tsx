@@ -77,7 +77,7 @@ export default function Schedule() {
                   onClick={() => setFilterDay(day)}
                   className={`px-3 sm:px-4 py-2.5 font-mono text-xs sm:text-sm tracking-wider uppercase transition-all whitespace-nowrap min-h-[44px] ${
                     filterDay === day
-                      ? "bg-primary text-black font-bold"
+                      ? "bg-primary text-white font-bold"
                       : "border border-border text-muted-foreground hover:border-primary hover:text-primary"
                   }`}
                 >

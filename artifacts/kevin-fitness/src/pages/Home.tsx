@@ -1,6 +1,9 @@
 import { useState, useEffect, useRef, useCallback } from "react";
 import { Link } from "wouter";
-import { motion, useInView } from "framer-motion";
+import { motion, useInView, type Variants } from "framer-motion";
+
+// Typed cubic-bezier so framer-motion v12 accepts it
+const BZ: [number, number, number, number] = [0.22, 1, 0.36, 1];
 import { ArrowRight, Star, ChevronRight, ChevronLeft, ChevronsLeftRight } from "lucide-react";
 import { supabase } from "@/lib/supabase";
 import useEmblaCarousel from "embla-carousel-react";
@@ -77,12 +80,12 @@ function BeforeAfterSlider({ before, after }: { before: string; after: string })
         <span className="font-mono text-[10px] tracking-widest text-white/70 uppercase">Before</span>
       </div>
       <div className="absolute top-4 right-4 bg-primary px-3 py-1 pointer-events-none">
-        <span className="font-mono text-[10px] tracking-widest text-black font-bold uppercase">After</span>
+        <span className="font-mono text-[10px] tracking-widest text-white font-bold uppercase">After</span>
       </div>
       {/* Handle */}
       <div className="ba-handle" style={{ left: `${pos}%` }}>
         <div className="ba-handle-circle">
-          <ChevronsLeftRight className="w-5 h-5 text-black" />
+          <ChevronsLeftRight className="w-5 h-5 text-white" />
         </div>
       </div>
     </div>
@@ -154,7 +157,7 @@ function Testimonials() {
                   <p className="text-white/60 leading-relaxed text-sm sm:text-base mb-6 italic">"{r.text}"</p>
                   <div className="flex items-center gap-3 border-t border-white/8 pt-5">
                     <div className="w-8 h-8 bg-primary flex items-center justify-center shrink-0">
-                      <span className="font-display text-black text-sm">G</span>
+                      <span className="font-display text-white text-sm">G</span>
                     </div>
                     <div>
                       <p className="font-display text-sm tracking-widest text-white">{r.author}</p>
@@ -227,11 +230,11 @@ export default function Home() {
   };
   const heroItem = {
     hidden:  { opacity: 0, y: 40 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.75, ease: [0.22, 1, 0.36, 1] } },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.75, ease: BZ } },
   };
   const fadeUp = (delay = 0) => ({
     hidden:  { opacity: 0, y: 30 },
-    visible: { opacity: 1, y: 0, transition: { delay, duration: 0.6, ease: [0.22, 1, 0.36, 1] } },
+    visible: { opacity: 1, y: 0, transition: { delay, duration: 0.6, ease: BZ } },
   });
 
   return (
@@ -310,7 +313,7 @@ export default function Home() {
           >
             <Link
               href="/book"
-              className="px-10 sm:px-14 py-4 sm:py-5 bg-primary text-black font-display text-lg sm:text-xl tracking-widest uppercase hover:bg-white transition-all text-center min-h-[52px] flex items-center justify-center gap-2 group hover:shadow-[0_0_30px_rgba(245,200,0,0.45)] hover:-translate-y-0.5"
+              className="px-10 sm:px-14 py-4 sm:py-5 bg-primary text-white font-display text-lg sm:text-xl tracking-widest uppercase hover:bg-white transition-all text-center min-h-[52px] flex items-center justify-center gap-2 group hover:shadow-[0_0_30px_rgba(225,29,72,0.5)] hover:-translate-y-0.5"
             >
               Join Today <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
             </Link>
@@ -339,10 +342,10 @@ export default function Home() {
             <div key={rep} className="flex shrink-0 items-center">
               {["5+ Years Active", "500+ Members", "8 Expert Trainers", "20+ Classes Weekly", "Open Every Day", "Certified Coaches", "Jalandhar's Best"].map((item, i) => (
                 <div key={i} className="flex items-center">
-                  <span className="font-display text-black text-sm sm:text-lg tracking-[0.15em] uppercase px-6 sm:px-10 whitespace-nowrap">
+                  <span className="font-display text-white text-sm sm:text-lg tracking-[0.15em] uppercase px-6 sm:px-10 whitespace-nowrap">
                     {item}
                   </span>
-                  <span className="text-black/30 text-xl">✦</span>
+                  <span className="text-white/30 text-xl">✦</span>
                 </div>
               ))}
             </div>
@@ -376,7 +379,7 @@ export default function Home() {
               >
                 <div
                   className="font-display text-primary mb-2"
-                  style={{ fontSize: "clamp(3rem, 7vw, 6rem)", textShadow: "0 0 40px rgba(245,200,0,0.3)" }}
+                  style={{ fontSize: "clamp(3rem, 7vw, 6rem)", textShadow: "0 0 40px rgba(225,29,72,0.35)" }}
                 >
                   <Counter target={stat.value} suffix={stat.suffix} />
                 </div>
@@ -413,7 +416,7 @@ export default function Home() {
             initial={{ opacity: 0, x: -40 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+            transition={{ duration: 0.7, ease: BZ }}
             className="relative"
           >
             <div className="absolute -inset-3 sm:-inset-4 border border-primary/20 z-0 hidden sm:block" />
@@ -425,8 +428,8 @@ export default function Home() {
             />
             {/* Since badge */}
             <div className="absolute bottom-0 left-0 z-20 bg-primary px-6 py-4">
-              <span className="font-display text-black text-xl sm:text-2xl tracking-wider block">Since 2019</span>
-              <span className="font-mono text-black/60 text-[10px] tracking-widest uppercase">Jalandhar, Punjab</span>
+              <span className="font-display text-white text-xl sm:text-2xl tracking-wider block">Since 2019</span>
+              <span className="font-mono text-white/60 text-[10px] tracking-widest uppercase">Jalandhar, Punjab</span>
             </div>
             {/* Floating stat */}
             <div className="absolute top-4 right-0 sm:-right-4 z-20 glass border border-white/10 px-4 py-3 text-center hidden sm:block">
@@ -440,7 +443,7 @@ export default function Home() {
             initial={{ opacity: 0, x: 40 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1], delay: 0.1 }}
+            transition={{ duration: 0.7, ease: BZ, delay: 0.1 }}
           >
             <span className="font-mono text-[10px] tracking-[0.4em] text-primary uppercase mb-5 block">
               Our Philosophy
@@ -478,7 +481,7 @@ export default function Home() {
             </div>
             <Link
               href="/contact"
-              className="inline-flex items-center gap-3 px-8 sm:px-10 py-4 bg-primary text-black font-display text-base sm:text-lg tracking-widest uppercase hover:bg-white transition-all group min-h-[52px] hover:shadow-[0_0_25px_rgba(245,200,0,0.35)]"
+              className="inline-flex items-center gap-3 px-8 sm:px-10 py-4 bg-primary text-white font-display text-base sm:text-lg tracking-widest uppercase hover:bg-white transition-all group min-h-[52px] hover:shadow-[0_0_25px_rgba(225,29,72,0.4)]"
             >
               Get Started <ChevronRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
             </Link>
@@ -521,7 +524,7 @@ export default function Home() {
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ delay: i * 0.08, duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+                transition={{ delay: i * 0.08, duration: 0.5, ease: BZ }}
                 className={`shrink-0 w-[72vw] xs:w-[60vw] sm:w-[44vw] md:w-auto snap-center flex flex-col p-6 relative ${
                   plan.popular ? "gradient-border-card" : "glass-card border border-white/6"
                 }`}
@@ -529,14 +532,14 @@ export default function Home() {
                 {plan.popular && (
                   <div className="absolute -top-px inset-x-0 flex justify-center">
                     <div className="bg-primary px-4 py-1">
-                      <span className="font-mono text-[9px] text-black font-bold tracking-[0.2em] uppercase">★ Popular</span>
+                      <span className="font-mono text-[9px] text-white font-bold tracking-[0.2em] uppercase">★ Popular</span>
                     </div>
                   </div>
                 )}
                 <div className={plan.popular ? "pt-4" : ""}>
                   <h3 className="font-display text-2xl text-white mb-3">{plan.name}</h3>
                   <div className="flex items-baseline gap-1 mb-2">
-                    <span className="font-display text-4xl text-primary" style={{ textShadow: "0 0 20px rgba(245,200,0,0.25)" }}>
+                    <span className="font-display text-4xl text-primary" style={{ textShadow: "0 0 20px rgba(225,29,72,0.3)" }}>
                       ₹{plan.price.toLocaleString()}
                     </span>
                   </div>
@@ -628,7 +631,7 @@ export default function Home() {
                 initial={{ opacity: 0, y: 40 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ delay: i * 0.1, duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+                transition={{ delay: i * 0.1, duration: 0.6, ease: BZ }}
                 className="group cursor-pointer"
               >
                 <div className="relative h-[220px] sm:h-[300px] lg:h-[400px] overflow-hidden bg-[#0a0a0a]">
@@ -678,7 +681,7 @@ export default function Home() {
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+          transition={{ duration: 0.8, ease: BZ }}
         >
           <span className="font-mono text-[10px] tracking-[0.4em] text-primary uppercase mb-6 border border-primary/30 px-4 py-2 inline-block">
             Your Moment Is Now
@@ -700,7 +703,7 @@ export default function Home() {
           </p>
           <Link
             href="/book"
-            className="inline-flex items-center gap-3 px-12 sm:px-16 py-5 sm:py-6 bg-primary text-black font-display text-xl sm:text-2xl tracking-widest uppercase hover:bg-white transition-all min-h-[60px] group hover:shadow-[0_0_40px_rgba(245,200,0,0.5)]"
+            className="inline-flex items-center gap-3 px-12 sm:px-16 py-5 sm:py-6 bg-primary text-white font-display text-xl sm:text-2xl tracking-widest uppercase hover:bg-white transition-all min-h-[60px] group hover:shadow-[0_0_40px_rgba(225,29,72,0.55)]"
           >
             Join Now <ArrowRight className="w-6 h-6 group-hover:translate-x-1 transition-transform" />
           </Link>
@@ -738,7 +741,7 @@ export default function Home() {
 
       {/* ── STICKY MOBILE CTA ── */}
       <div className={`sticky-cta md:hidden ${showStickyCta ? "visible" : ""}`}>
-        <Link href="/book" className="font-display text-black tracking-widest uppercase text-base">
+        <Link href="/book" className="font-display text-white tracking-widest uppercase text-base">
           Join Kevin Fitness — Book Now
         </Link>
       </div>

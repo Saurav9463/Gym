@@ -61,7 +61,7 @@ export default function Gallery() {
                   key={cat}
                   onClick={() => setFilter(cat)}
                   className={`px-4 sm:px-6 py-2.5 font-display tracking-widest uppercase transition-all text-sm whitespace-nowrap min-h-[44px] ${
-                    filter === cat ? "bg-primary text-black" : "ghost-gold-btn"
+                    filter === cat ? "bg-primary text-white" : "ghost-gold-btn"
                   }`}
                 >
                   {cat}
