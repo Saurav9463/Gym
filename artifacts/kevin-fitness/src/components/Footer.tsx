@@ -65,7 +65,7 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="pt-8 border-t border-border text-center text-sm text-muted-foreground font-mono">
+        <div className="pt-8 pb-16 md:pb-0 border-t border-border text-center text-sm text-muted-foreground font-mono">
           <p>&copy; {new Date().getFullYear()} Kevin Fitness. All rights reserved.</p>
           <Link
             href="/admin/login"

@@ -303,9 +303,9 @@ export default function Home() {
         {/* Trainer photo — right half */}
         <div className="absolute right-0 inset-y-0 w-[45%] sm:w-[42%] lg:w-[40%] pointer-events-none select-none hidden sm:block">
           <img
-            src={photoKevin}
+            src="/hero2.png"
             alt="Kevin Fitness Trainer"
-            className="w-full h-full object-cover object-top"
+            className="w-full h-full object-cover object-center"
             loading="eager"
           />
           <div
