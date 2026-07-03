@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { supabase } from "@/lib/supabase";
 import { Plus, Edit2, Trash2, X } from "lucide-react";
+import ImageUpload from "@/components/admin/ImageUpload";
 
 export default function TrainersAdmin() {
   const [trainers, setTrainers] = useState<any[]>([]);
@@ -170,10 +171,12 @@ export default function TrainersAdmin() {
                 <input type="text" placeholder="Comma separated list" value={formData.certifications} onChange={e => setFormData({...formData, certifications: e.target.value})} className="w-full bg-input border border-border p-3 focus:border-primary outline-none" />
               </div>
 
-              <div>
-                <label className="font-mono text-xs uppercase tracking-widest text-muted-foreground mb-2 block">Photo URL</label>
-                <input type="text" placeholder="https://..." value={formData.photo_url} onChange={e => setFormData({...formData, photo_url: e.target.value})} className="w-full bg-input border border-border p-3 focus:border-primary outline-none" />
-              </div>
+              <ImageUpload
+                value={formData.photo_url}
+                onChange={url => setFormData({ ...formData, photo_url: url })}
+                folder="trainers"
+                label="Trainer Photo"
+              />
 
               <div className="pt-2">
                 <label className="flex items-center gap-2 cursor-pointer">

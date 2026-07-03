@@ -57,6 +57,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
     { label: "Bookings", path: "/admin/bookings" },
     { label: "Plans", path: "/admin/plans" },
     { label: "Trainers", path: "/admin/trainers" },
+    { label: "Gallery", path: "/admin/gallery" },
     { label: "Messages", path: "/admin/messages" },
     { label: "Settings", path: "/admin/settings" },
   ];
