@@ -24,6 +24,7 @@ import Dashboard from "@/pages/admin/Dashboard";
 import BookingsAdmin from "@/pages/admin/Bookings";
 import PlansAdmin from "@/pages/admin/Plans";
 import TrainersAdmin from "@/pages/admin/TrainersAdmin";
+import GalleryAdmin from "@/pages/admin/GalleryAdmin";
 import MessagesAdmin from "@/pages/admin/Messages";
 import SettingsAdmin from "@/pages/admin/Settings";
 
@@ -117,6 +118,13 @@ function Router() {
         {() => (
           <AdminLayout>
             <TrainersAdmin />
+          </AdminLayout>
+        )}
+      </Route>
+      <Route path="/admin/gallery">
+        {() => (
+          <AdminLayout>
+            <GalleryAdmin />
           </AdminLayout>
         )}
       </Route>
