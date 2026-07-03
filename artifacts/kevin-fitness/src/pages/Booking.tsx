@@ -28,8 +28,23 @@ export default function Booking() {
   const [success, setSuccess] = useState(false);
 
   useEffect(() => {
-    supabase.from("memberships").select("*").eq("active", true).then(({ data }) => setPlans(data ?? []));
-    supabase.from("trainers").select("*").eq("active", true).then(({ data }) => setTrainers(data ?? []));
+    supabase.from("memberships").select("*").eq("active", true).then(({ data }) => {
+      const list = data ?? [];
+      setPlans(list);
+      // Guard against a stale/invalid ?plan= URL param (e.g. pointing at an id
+      // that doesn't exist, or a non-UUID value from an old fallback link).
+      if (formData.planId && !list.some((p: any) => p.id === formData.planId)) {
+        setFormData(prev => ({ ...prev, planId: "" }));
+      }
+    });
+    supabase.from("trainers").select("*").eq("active", true).then(({ data }) => {
+      const list = data ?? [];
+      setTrainers(list);
+      if (formData.trainerId && !list.some((t: any) => t.id === formData.trainerId)) {
+        setFormData(prev => ({ ...prev, trainerId: "" }));
+      }
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const timeSlots = ["06:00 AM", "07:00 AM", "08:00 AM", "09:00 AM", "10:00 AM", "05:00 PM", "06:00 PM", "07:00 PM", "08:00 PM"];
@@ -44,8 +59,11 @@ export default function Booking() {
         client_name: formData.name,
         client_email: formData.email,
         client_phone: formData.phone,
-        plan_id: formData.planId ? parseInt(formData.planId) : null,
-        trainer_id: formData.trainerId ? parseInt(formData.trainerId) : null,
+        // plan_id / trainer_id are uuid columns — do NOT parseInt() them,
+        // that's what was corrupting real UUIDs (e.g. turning them into "1"
+        // and failing with "invalid input syntax for type uuid").
+        plan_id: formData.planId || null,
+        trainer_id: formData.trainerId || null,
         appointment_date: formData.date,
         appointment_time: formData.time,
         notes: formData.notes,

@@ -13,6 +13,7 @@ const fadeUp = (delay = 0) => ({
 
 export default function Memberships() {
   const [plans, setPlans] = useState<any[]>([]);
+  const [hasLivePlans, setHasLivePlans] = useState(false);
 
   useEffect(() => {
     supabase
@@ -21,6 +22,7 @@ export default function Memberships() {
       .eq("active", true)
       .order("price")
       .then(({ data }) => {
+        setHasLivePlans(!!(data && data.length > 0));
         setPlans(
           data && data.length > 0
             ? data
@@ -209,7 +211,7 @@ export default function Memberships() {
                     </ul>
 
                     <Link
-                      href={`/book?plan=${plan.id}`}
+                      href={hasLivePlans ? `/book?plan=${plan.id}` : "/book"}
                       className={`w-full py-4 rounded-xl text-center font-semibold text-sm flex items-center justify-center gap-2 transition-all ${
                         featured
                           ? "bg-white/15 text-white hover:bg-white/25 border border-white/25"
@@ -253,7 +255,7 @@ export default function Memberships() {
                 ))}
               </div>
               <Link
-                href={`/book?plan=${plans[3].id}`}
+                href={hasLivePlans ? `/book?plan=${plans[3].id}` : "/book"}
                 className="shrink-0 px-6 py-3 rounded-full border border-primary text-primary font-semibold text-sm hover:bg-primary hover:text-white transition-all"
               >
                 Get started

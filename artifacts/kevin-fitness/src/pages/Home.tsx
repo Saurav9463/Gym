@@ -329,7 +329,8 @@ export default function Home() {
     { id: 4, name: "Anita Kaur", role: "Weight Loss Expert", photo_url: photoAnita },
   ];
 
-  const displayPlans = plans.length > 0 ? plans : fallbackPlans;
+  const hasLivePlans = plans.length > 0;
+  const displayPlans = hasLivePlans ? plans : fallbackPlans;
   const displayTrainers = trainers.length > 0 ? trainers : fallbackTrainers;
 
   // Guarantee a featured plan
@@ -907,7 +908,7 @@ export default function Home() {
                     ))}
                   </ul>
                   <Link
-                    href={`/book?plan=${plan.id}`}
+                    href={hasLivePlans ? `/book?plan=${plan.id}` : "/book"}
                     className={`w-full py-3.5 text-center font-display tracking-widest text-sm flex items-center justify-center transition-all ${
                       featured
                         ? "bg-white/15 text-white hover:bg-white/25 border border-white/20"
