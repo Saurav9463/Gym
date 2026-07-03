@@ -1,0 +1,47 @@
+You are a senior UI/UX designer and full-stack developer. Redesign and refactor the Kevin Fitness gym website (React + Tailwind, in artifacts/kevin-fitness) so it stops looking like a generic AI-template and looks like a bespoke, paid, brand-specific build. Do NOT just reskin colors — actually change the structural/visual patterns listed below. Make all changes production-ready, keep the site fully responsive, and don't break the existing booking/admin functionality (Booking, Trainers, Schedule, admin Dashboard/Bookings/Messages/Plans/TrainersAdmin/Login).
+
+1. Brand identity — replace the generic AI-template look
+
+
+Remove Poppins as the display font (it reads as "AI page builder" — overused in template generators). Choose a distinctive, athletic/condensed display typeface for headlines (e.g. something like Bebas Neue, Anton, or a bold condensed grotesk) paired with a clean body font that isn't Inter's default weight-and-tracking setup. Load via Google Fonts.
+Move off the generic "black background + single orange accent" template palette in index.css. Keep dark mode if desired, but develop a real 2-3 color brand palette (e.g. a distinct primary + a secondary/support color + a warm neutral) with your own HSL values — not the current 18 100% 56% orange-on-near-black default.
+Replace the pill-shaped buttons-with-arrow-icon pattern (used in every CTA) with a button style that has a distinct shape/border treatment tied to the new brand — this specific "rounded pill + arrow" pattern is an instant AI-template tell.
+Redesign the animated stat counters section and the accordion "Why Choose Us" section so they don't look like stock template components — change the layout, not just the colors (e.g. different grid structure, custom icons instead of generic checkmarks/chevrons).
+Remove or restyle the orange horizontal marquee ticker ("Join Kevin Fitness — Book Now") — it's a template pattern; if kept, make it visually distinct (custom shape, brand pattern, or replace with a sticky compact CTA bar instead).
+
+
+2. Imagery — generate AI images instead of misusing gallery photos
+
+The current site reuses raw gallery/phone photos (cluttered, unpolished, actual gym snapshots) as hero backgrounds, About section imagery, and service card thumbnails. These real photos should ONLY be used in the actual Gallery page, where authenticity is appropriate. Everywhere else, generate clean AI images purpose-built for that section:
+
+
+Hero background: a cinematic, moody gym action shot (weights, motion blur, dramatic lighting) matching the new brand palette — not a literal photo of this specific gym's cluttered interior.
+About Us section image: a polished equipment/atmosphere shot that supports the brand story, not a re-crop of a gallery photo.
+Service cards (Personal Training, Fitness Classes, Strength Training, Cardio & Endurance, Yoga, etc.): generate one clean, purpose-specific image per service, consistent in lighting/color grade with each other (so the card row doesn't look like mismatched stock photos).
+Testimonial/social-proof section: if using imagery, generate a subtle abstract/textured background rather than photos of unnamed people (avoid implying fake customer photos).
+Keep the real gym photos (weights, treadmills, motivational posters, the actual space) exclusively in the Gallery page, clearly framed as "our space" — this is where authentic, real photos build trust; everywhere else they currently undercut the polished sections around them.
+Ensure generated images share consistent color grading/mood with the new brand palette so the whole site feels shot/art-directed as one campaign, not assembled from different sources.
+
+
+3. Content and trust signals
+
+
+Replace generic hero copy ("Push Your Limits with Us") with something specific to Kevin Fitness's actual positioning (Jalandhar's local gym, established 2019, real member count) — pull real numbers into the stat counters or clearly mark them as placeholders to update before client handoff.
+Make the Google review count/rating in the testimonials section either pulled live from a Google Places API/embed, or clearly a placeholder — don't hardcode a specific review count as if it's live data.
+Differentiate the three membership tiers with at least one distinct, non-repeated benefit per tier instead of scaled repeats of the same bullets.
+Add trainer certifications/credentials info to the Trainers page if not already present.
+
+
+4. UX hierarchy
+
+
+Reduce competing CTAs: standardize on ONE primary action pattern (e.g. "Join Now") and make the WhatsApp button, footer CTA bar, and nav CTA visually secondary/tertiary to it.
+Make sure the Trainers, Schedule, and Booking pages are prominently linked from the homepage (not just top nav), since they're real functional pages, not just static content.
+Verify the hero testimonial video actually plays on click and has a proper fallback poster image.
+
+
+5. QA
+
+
+Test full responsiveness at mobile (375px), tablet (768px), and desktop widths.
+Confirm the admin dashboard flow (login → bookings/messages/plans/trainers management) still works end-to-end after the redesign — this is a key differentiator to show in a client pitch, don't let styling changes break it.

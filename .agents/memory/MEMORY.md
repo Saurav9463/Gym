@@ -1,2 +1,2 @@
 - [Framer Motion v12 bezier typing](framer-motion-bezier.md) — inline `[number, number, number, number]` arrays in Variants objects must use a typed const, not literals.
-- [Kevin Fitness brand](kevin-fitness-brand.md) — primary accent is red #e11d48 (hsl 347 77% 50%); all primary-bg elements use text-white.
+- [Kevin Fitness brand](kevin-fitness-brand.md) — redesigned: Bebas Neue display, crimson primary hsl(349 72% 44%), parallelogram kf-btn-* buttons, sharp corners throughout.

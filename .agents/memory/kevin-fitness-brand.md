@@ -1,62 +1,35 @@
 ---
 name: Kevin Fitness brand system
-description: Design tokens, font, and conventions for the Kevin Fitness gym website.
+description: Typography, palette, button shape, and layout conventions for the Kevin Fitness gym site after the 2025 redesign.
 ---
 
-## Primary accent
-- Color: `#FF5A1F` (vivid orange) — defined as `--primary: 18 100% 56%` in CSS vars
-- Foreground on primary: **white** (`--primary-foreground: 0 0% 100%`)
-- All primary-bg elements use `text-white`
-- rgba equivalent for shadows/glows: `rgba(255,90,31,...)`
+## Fonts
+- **Display:** `Bebas Neue` — single-weight condensed display face. Use `font-weight: 400` (only weight). Letter-spacing must be POSITIVE: `0.03em`–`0.06em`. Never use negative letter-spacing with Bebas Neue.
+- **Body:** `Plus Jakarta Sans` (replaced Inter) — weights 300–800.
+- **Mono:** `DM Mono`
 
-## Typography
-- Display/Headings: **Poppins** 800 (`--font-display: 'Poppins', sans-serif`)
-  - Previously Bebas Neue — changed to Poppins to match Dribbble reference
-  - Headings use `font-weight: 800`, `letter-spacing: -0.02em`
-  - Most section headings are ALL CAPS; hero heading is mixed-case with inline style `textTransform: "none"`
-- Body: Inter (`font-sans`)
-- Mono: DM Mono (`font-mono`)
+## Color Palette (3-colour brand)
+- **Primary:** `hsl(349 72% 44%)` → `#C91E39` — deep crimson (replaced the old orange `#FF5A1F`)
+- **Secondary:** `hsl(215 18% 38%)` → `#536478` — steel-slate (used sparingly)
+- **Background:** `#0c0d12` (cool near-black) alternating with `#090a0f` (deeper)
+- All primary-color interactive elements use `color: #fff` (crimson + white, never crimson + black)
 
-## Bezier easing
-- Always use `const BZ: [number, number, number, number] = [0.22, 1, 0.36, 1];` at file scope
-- Never inline `[0.22, 1, 0.36, 1]` inside Variants objects (framer-motion v12 type error)
+## Button System
+- **Primary:** `.kf-btn-primary` — parallelogram via `clip-path: polygon(12px 0%, 100% 0%, calc(100% - 12px) 100%, 0% 100%)`, `background: hsl(var(--primary))`, sharp corners, Bebas Neue, `letter-spacing: 0.14em`
+- **Ghost:** `.kf-btn-ghost` — same clip-path, transparent with white border
+- **Small:** `.kf-btn-sm` / `.kf-btn-sm-ghost` — 8px offset version
+- Legacy `.pill-btn-primary` / `.pill-btn-ghost` kept as rectangular aliases (used in admin/booking pages that weren't redesigned)
+- NOT pills, NOT `rounded-full` — brand is sharp-corner / parallelogram throughout
 
-## Border radius (NOT squared anymore)
-- Cards: `rounded-2xl` (16px) — `--radius-lg: 14px`, `--radius-xl: 18px`
-- Buttons pill: `rounded-full` (50px) — use `.pill-btn-primary` / `.pill-btn-ghost` CSS classes
-- `--radius: 10px` (default)
+## Layout Conventions
+- **Border radius:** `0` or `2px` everywhere (sharp corners)
+- **Grid dividers:** Container carries `border-left` + `border-top`; each cell carries `border-right` + `border-bottom` — produces clean responsive grid at any column count
+- **Section eyebrows:** `font-mono text-[11px] uppercase tracking-[0.25em] text-white/30` — NOT `text-primary`
+- **Why-Choose-Us:** Numbered always-visible 6-cell grid (01–06), no accordion
 
-## Button styles
-- Primary: `.pill-btn-primary` — orange bg, `border-radius: 50px`, white text, drop shadow on hover
-- Ghost: `.pill-btn-ghost` — semi-transparent bg, white border `border-radius: 50px`, backdrop-blur
+## Images
+- AI-generated images in `artifacts/kevin-fitness/public/ai/`: hero.jpg, about.jpg, svc-personal-training.jpg, svc-fitness-classes.jpg, svc-strength.jpg, svc-cardio.jpg, svc-yoga.jpg, svc-hiit.jpg
+- Real gym photos (`attached_assets/image_178288775*.png`) used ONLY in Gallery page and as `AiImg` fallbacks
+- `AiImg` component in Home.tsx handles fallback with guard against infinite error loops
 
-## Section backgrounds (alternating)
-- Dark warm: `#0d0a08` (slightly brown-tinted near-black)
-- Dark charcoal: `#111113`
-
-## Smooth scroll
-- Lenis initialized in `artifacts/kevin-fitness/src/main.tsx`, RAF loop
-- Exposed as `window.__lenis` for GSAP ScrollTrigger proxy if needed
-- `scroll-behavior: smooth` removed from `html {}` to avoid conflict with Lenis
-
-## Navbar
-- Logo: `⚡ KEVINFITNESS` — lightning bolt emoji + bold white/orange text
-- Nav links: natural-case text (not tracked uppercase) in white/65, `text-primary` when active
-- CTA: orange pill "Join Now" button (`rounded-full`, `bg-primary`)
-- Glassmorphism on scroll: `bg-[#0d0a08]/90 backdrop-blur-2xl`
-- Scroll progress bar at top: 2px red line
-
-## Home page sections (in order)
-1. Hero: dark bg + trainer photo right, text left, pill CTAs, trust row (avatar cluster + stars), service chips
-2. About + Stats: orange label, big heading, 4 counters, gym photo with play button
-3. Services: horizontal Embla carousel with photo cards, arrow buttons (prev left outline, next right orange)
-4. Why Choose Us: image left, accordion right (AccordionItem component with aria-expanded)
-5. Pricing Preview: 3-column cards, guaranteed featured center (normalizedPlans logic)
-6. Testimonials: Embla carousel with auto-advance
-7. Gallery strip: 4-column grid
-8. CTA section + sticky mobile CTA
-
-## Pricing card "featured" logic
-- Always guarantee exactly one featured card: prefer `plan.popular`, else force `i === 1` (center)
-- Pattern: `const normalizedPlans = displayPlans.slice(0,3).map((p,i,arr) => ({ ...p, _featured: p.popular || (!arr.some(x => x.popular) && i === 1) }))`
-- Use `plan._featured` not `plan.popular` to determine orange card styling
+**Why:** Old orange-on-black with Poppins and pill buttons read as a generic AI page-builder template. The redesign targets a bespoke, editorial, athletic brand identity.

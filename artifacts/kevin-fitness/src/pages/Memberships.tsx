@@ -163,7 +163,7 @@ export default function Memberships() {
                     <div className="mb-1 flex items-baseline gap-1">
                       <span
                         className="font-black text-5xl text-white"
-                        style={{ fontFamily: "var(--font-display)", letterSpacing: "-0.02em" }}
+                        style={{ fontFamily: "var(--font-display)", letterSpacing: "0.03em" }}
                       >
                         ₹{plan.price.toLocaleString()}
                       </span>
@@ -319,7 +319,7 @@ export default function Memberships() {
         <div className="max-w-2xl mx-auto px-4 text-center">
           <h2
             className="text-white mb-4 leading-tight"
-            style={{ fontSize: "clamp(1.6rem, 3.5vw, 2.8rem)", fontWeight: 800, letterSpacing: "-0.02em", textTransform: "none" }}
+            style={{ fontFamily: "var(--font-display)", fontSize: "clamp(2rem, 4vw, 3.5rem)", letterSpacing: "0.04em" }}
           >
             Not sure which plan is right for you?
           </h2>
@@ -328,10 +328,10 @@ export default function Memberships() {
             the perfect plan for you.
           </p>
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
-            <Link href="/contact" className="pill-btn-primary">
-              Get Free Consultation <ArrowRight className="w-4 h-4" />
+            <Link href="/contact" className="kf-btn-primary">
+              Get Free Consultation
             </Link>
-            <Link href="/schedule" className="pill-btn-ghost">
+            <Link href="/schedule" className="kf-btn-ghost">
               View Class Schedule
             </Link>
           </div>

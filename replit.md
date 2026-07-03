@@ -23,13 +23,17 @@ A premium gym management website for Kevin Fitness, Jalandhar — built for perf
 
 ## Design System
 
-- **Primary accent:** `#FF5A1F` (vivid orange) — `hsl(18 100% 56%)` / `rgba(255,90,31,...)`
-- **Background dark:** `#0d0a08` (warm near-black) and `#111113` (charcoal) — alternating sections
-- **Typography:** Poppins 800 (display headings), Inter (body), DM Mono (mono)
-  - Section headings: ALL CAPS, `letter-spacing: -0.02em`, `font-weight: 800`
-  - Hero heading: mixed case, `textTransform: "none"` inline override
-- **Border radius:** Cards `rounded-2xl` (16px), Buttons pill (`50px`) — NOT squared
-- **Pill buttons:** `.pill-btn-primary` (orange) and `.pill-btn-ghost` (semi-transparent) CSS classes
+- **Primary accent:** `#C91E39` (deep crimson) — `hsl(349 72% 44%)`
+- **Secondary:** `hsl(215 18% 38%)` (steel-slate) — used sparingly
+- **Background dark:** `#0c0d12` (cool near-black) and `#090a0f` (deeper) — alternating sections
+- **Typography:** Bebas Neue (display headings, weight 400 — it's a single-weight display face), Plus Jakarta Sans (body, weights 300–800), DM Mono (mono)
+  - Section headings: ALL CAPS, `letter-spacing: 0.04em` (positive — Bebas Neue is condensed)
+  - `fontWeight: 400` on Bebas Neue headings (not 800 — Bebas has only one weight)
+  - DO NOT use `letterSpacing: "-0.02em"` with Bebas Neue — use `0.03em` to `0.06em`
+- **Brand buttons:** `.kf-btn-primary` and `.kf-btn-ghost` — parallelogram shape via `clip-path: polygon(12px 0%, 100% 0%, calc(100% - 12px) 100%, 0% 100%)`
+  - Small variants: `.kf-btn-sm` and `.kf-btn-sm-ghost`
+  - Legacy `.pill-btn-primary` / `.pill-btn-ghost` kept as aliases (admin-safe, now rectangular)
+- **Border radius:** Cards / buttons use `border-radius: 0` or `2px` (sharp corners) — NOT rounded
 - **Smooth scroll:** Lenis initialized in `src/main.tsx`
 
 ## Where things live
@@ -53,13 +57,18 @@ A premium gym management website for Kevin Fitness, Jalandhar — built for perf
 - Lenis replaces native scroll-behavior — the CSS property was removed from `html {}`
 - Bezier easing `[0.22, 1, 0.36, 1]` MUST be typed as `const BZ: [number, number, number, number]` at file scope — never inline inside Variants objects (framer-motion v12 type error)
 - Featured pricing card always guaranteed: use `normalizedPlans` pattern (force index 1 if no `popular` flag set)
+- AI-generated images live in `artifacts/kevin-fitness/public/ai/` and are served at `/ai/*.jpg`. Each has a fallback via the `AiImg` component to real gym photos in `attached_assets/`
+- Gallery strip in Home.tsx uses real gym photos intentionally — authentic "our space" context
+- Why-Choose-Us grid uses container-carries-left+top / cell-carries-right+bottom border pattern for clean responsive grid lines
 
 ## Gotchas
 
-- Poppins (not Bebas Neue) is the display font — letter-spacing should be `-0.02em` NOT `0.04em`
-- All primary-color interactive elements use `text-white` (orange + white, not orange + black)
-- Pill buttons use `.pill-btn-primary` / `.pill-btn-ghost` CSS classes, NOT Tailwind `rounded-full` alone
-- `--radius: 10px` globally — override to `50px` for pill buttons, `16px` for cards
+- **Bebas Neue** is the display font (replaced Poppins). It is a SINGLE-WEIGHT condensed face — `font-weight: 400` only; setting 800 has no effect
+- Bebas Neue letter-spacing must be POSITIVE (`0.03em`–`0.06em`) — negative values look cramped
+- Brand buttons use `.kf-btn-primary` / `.kf-btn-ghost` (parallelogram clip-path), NOT the old pill pattern
+- All primary-color interactive elements use `text-white` (crimson + white)
+- `--radius: 0px` globally — brand uses sharp corners throughout
+- Google review count (154) in Testimonials is a hardcoded placeholder — replace with live Google Places embed before client handoff
 
 ## User preferences
 

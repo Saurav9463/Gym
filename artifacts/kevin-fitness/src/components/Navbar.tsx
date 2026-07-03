@@ -40,22 +40,31 @@ export default function Navbar() {
       <nav
         className={`fixed top-0 w-full z-[1001] transition-all duration-400 ${
           scrolled || isOpen
-            ? "bg-[#0d0a08]/90 backdrop-blur-2xl border-b border-white/[0.07] shadow-[0_4px_30px_rgba(0,0,0,0.5)]"
+            ? "bg-[#0c0d12]/92 backdrop-blur-2xl border-b border-white/[0.06] shadow-[0_4px_30px_rgba(0,0,0,0.6)]"
             : "bg-transparent border-b border-transparent"
         }`}
       >
-        {/* Scroll progress */}
+        {/* Scroll progress bar */}
         <div
           className="absolute top-0 left-0 h-[2px] bg-primary transition-all duration-100 z-50"
-          style={{ width: `${scrollProgress}%`, boxShadow: "0 0 10px rgba(255,90,31,0.7)" }}
+          style={{ width: `${scrollProgress}%`, boxShadow: "0 0 8px rgba(201,30,57,0.7)" }}
         />
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between h-16 sm:h-20 items-center">
             {/* Logo */}
-            <Link href="/" className="flex items-center gap-2 group shrink-0">
-              <span className="text-primary text-xl">⚡</span>
-              <span className="font-display font-black text-lg sm:text-xl tracking-tight text-white">
+            <Link href="/" className="flex items-center gap-2.5 group shrink-0">
+              {/* Cut-corner logo mark */}
+              <span
+                className="w-7 h-7 bg-primary flex items-center justify-center shrink-0"
+                style={{ clipPath: "polygon(0 0, 100% 0, 100% 70%, 70% 100%, 0 100%)" }}
+              >
+                <span className="text-white font-bold text-xs leading-none">KF</span>
+              </span>
+              <span
+                className="font-display tracking-wider text-white"
+                style={{ fontSize: "1.25rem", letterSpacing: "0.1em" }}
+              >
                 KEVIN<span className="text-primary">FITNESS</span>
               </span>
             </Link>
@@ -67,16 +76,21 @@ export default function Navbar() {
                   key={link.path}
                   href={link.path}
                   className={`text-sm font-medium transition-colors duration-200 relative group ${
-                    location === link.path ? "text-primary" : "text-white/65 hover:text-white"
+                    location === link.path ? "text-primary" : "text-white/60 hover:text-white"
                   }`}
                 >
                   {link.name}
-                  <span className={`absolute -bottom-1 left-0 h-[2px] bg-primary transition-all duration-300 ${location === link.path ? "w-full" : "w-0 group-hover:w-full"}`} />
+                  <span
+                    className={`absolute -bottom-1 left-0 h-[1.5px] bg-primary transition-all duration-300 ${
+                      location === link.path ? "w-full" : "w-0 group-hover:w-full"
+                    }`}
+                  />
                 </Link>
               ))}
               <Link
                 href="/book"
-                className="ml-2 px-5 py-2.5 bg-primary text-white text-sm font-semibold rounded-full transition-all duration-300 hover:shadow-[0_0_20px_rgba(255,90,31,0.5)] hover:-translate-y-0.5 hover:brightness-110 active:translate-y-0"
+                className="kf-btn-primary ml-2"
+                style={{ fontSize: "0.85rem", padding: "10px 24px" }}
               >
                 Join Now
               </Link>
@@ -97,31 +111,39 @@ export default function Navbar() {
 
       {/* Mobile overlay */}
       {isOpen && (
-        <div className="mobile-menu-open fixed inset-0 z-[1000] bg-[#0d0a08]/98 backdrop-blur-2xl flex flex-col overflow-y-auto">
-          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-80 h-40 bg-primary/10 blur-3xl pointer-events-none" />
+        <div className="mobile-menu-open fixed inset-0 z-[1000] bg-[#0c0d12]/98 backdrop-blur-2xl flex flex-col overflow-y-auto">
+          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-80 h-40 bg-primary/8 blur-3xl pointer-events-none" />
           <div className="pt-16 sm:pt-20" />
-          <div className="flex flex-col items-center justify-center flex-1 py-10 space-y-1 px-6">
+          <div className="flex flex-col items-center justify-center flex-1 py-10 space-y-0 px-6">
             {navLinks.map((link, i) => (
               <Link
                 key={link.path}
                 href={link.path}
                 style={{ animationDelay: `${i * 50}ms` }}
-                className={`w-full text-center py-4 text-2xl sm:text-3xl font-bold transition-all duration-200 border-b border-white/5 hover:text-primary ${
-                  location === link.path ? "text-primary" : "text-white/80"
+                className={`w-full text-center py-5 font-display tracking-widest transition-all duration-200 border-b border-white/[0.06] ${
+                  location === link.path
+                    ? "text-primary"
+                    : "text-white/75 hover:text-white"
                 }`}
+                onMouseEnter={undefined}
               >
-                {link.name}
+                <span style={{ fontSize: "clamp(1.6rem, 5vw, 2.2rem)", letterSpacing: "0.12em" }}>
+                  {link.name}
+                </span>
               </Link>
             ))}
             <Link
               href="/book"
-              className="mt-8 w-full py-4 bg-primary text-white text-xl font-bold rounded-full text-center hover:brightness-110 transition-all min-h-[54px] flex items-center justify-center shadow-[0_0_30px_rgba(255,90,31,0.35)]"
+              className="kf-btn-primary mt-10 w-full justify-center"
+              style={{ fontSize: "1.1rem", padding: "16px 36px" }}
             >
-              Join Now
+              Join Kevin Fitness
             </Link>
           </div>
           <div className="pb-8 text-center">
-            <p className="text-xs text-white/25 tracking-widest uppercase font-mono">Open 6 AM – 10 PM · Daily</p>
+            <p className="text-[11px] text-white/20 tracking-[0.3em] uppercase font-mono">
+              Jalandhar · Est. 2019 · 6 AM – 10 PM
+            </p>
           </div>
         </div>
       )}
