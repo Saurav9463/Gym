@@ -247,7 +247,6 @@ function Testimonials() {
 export default function Home() {
   const [plans, setPlans] = useState<any[]>([]);
   const [trainers, setTrainers] = useState<any[]>([]);
-  const [showStickyCta, setShowStickyCta] = useState(false);
   const heroRef = useRef<HTMLElement>(null);
   const [servicesRef, servicesApi] = useEmblaCarousel({ align: "start", dragFree: true });
 
@@ -267,14 +266,6 @@ export default function Home() {
       .then(({ data }) => {
         setTrainers(data ?? []);
       });
-  }, []);
-
-  useEffect(() => {
-    const onScroll = () => {
-      setShowStickyCta((heroRef.current?.getBoundingClientRect().bottom ?? 0) < 0);
-    };
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
   /* ── Fallback data (shown while Supabase loads or if empty) ── */
@@ -1023,12 +1014,6 @@ export default function Home() {
         </motion.div>
       </section>
 
-      {/* STICKY MOBILE CTA */}
-      <div className={`sticky-cta md:hidden ${showStickyCta ? "visible" : ""}`}>
-        <Link href="/book" className="font-display tracking-widest text-white text-base" style={{ letterSpacing: "0.12em" }}>
-          JOIN KEVIN FITNESS
-        </Link>
-      </div>
     </div>
   );
 }
