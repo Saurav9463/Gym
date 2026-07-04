@@ -80,7 +80,7 @@ export default function Trainers() {
                 <img
                   src={trainer.photo_url || "/gallery1.png"}
                   alt={trainer.name}
-                  className="w-full h-full object-cover object-top grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700"
+                  className="w-full h-full object-cover object-top group-hover:scale-105 transition-all duration-700"
                   loading="lazy"
                 />
                 {/* Overlay on hover */}

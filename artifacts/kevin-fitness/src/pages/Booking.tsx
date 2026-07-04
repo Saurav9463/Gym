@@ -240,7 +240,7 @@ export default function Booking() {
                   >
                     <img
                       src={trainer.photo_url || "/gallery1.png"}
-                      className="w-10 h-10 sm:w-12 sm:h-12 object-cover grayscale shrink-0"
+                      className="w-10 h-10 sm:w-12 sm:h-12 object-cover shrink-0"
                       alt={trainer.name}
                     />
                     <div>

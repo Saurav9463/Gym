@@ -957,7 +957,7 @@ export default function Home() {
               <img
                 src={img}
                 alt={`Kevin Fitness — our gym, image ${i + 1}`}
-                className="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700"
+                className="w-full h-full object-cover group-hover:scale-105 transition-all duration-700"
                 loading="lazy"
               />
               <div className="absolute inset-0 bg-black/50 group-hover:bg-black/15 transition-all duration-700" />
