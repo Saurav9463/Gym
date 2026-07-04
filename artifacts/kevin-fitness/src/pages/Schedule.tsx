@@ -62,7 +62,7 @@ export default function Schedule() {
           </span>
           <h1
             className="font-display mb-4 sm:mb-6"
-            style={{ fontSize: "clamp(2.5rem, 8vw, 6rem)" }}
+            style={{ fontSize: "clamp(2rem, 5vw, 3.5rem)" }}
           >
             Class <span className="text-primary italic">Schedule</span>
           </h1>

@@ -116,7 +116,7 @@ export default function Memberships() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.08 }}
             className="text-white mb-4 leading-tight"
-            style={{ fontSize: "clamp(2rem, 6vw, 5rem)", fontWeight: 800, letterSpacing: "-0.025em", textTransform: "none" }}
+            style={{ fontSize: "clamp(2rem, 4.5vw, 3.5rem)", fontWeight: 800, letterSpacing: "-0.025em", textTransform: "none" }}
           >
             FLEXIBLE <span className="text-primary">PLANS</span> FOR EVERY GOAL
           </motion.h1>
@@ -321,7 +321,7 @@ export default function Memberships() {
         <div className="max-w-2xl mx-auto px-4 text-center">
           <h2
             className="text-white mb-4 leading-tight"
-            style={{ fontFamily: "var(--font-display)", fontSize: "clamp(2rem, 4vw, 3.5rem)", letterSpacing: "0.04em" }}
+            style={{ fontFamily: "var(--font-display)", fontSize: "clamp(1.8rem, 3.5vw, 2.8rem)", letterSpacing: "0.04em" }}
           >
             Not sure which plan is right for you?
           </h2>

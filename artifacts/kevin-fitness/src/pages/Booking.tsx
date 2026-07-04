@@ -92,7 +92,7 @@ export default function Booking() {
           </div>
           <h1
             className="font-display mb-4"
-            style={{ fontSize: "clamp(2rem, 6vw, 3.5rem)" }}
+            style={{ fontSize: "clamp(1.8rem, 4vw, 2.8rem)" }}
           >
             Request Received
           </h1>
@@ -116,7 +116,7 @@ export default function Booking() {
           </span>
           <h1
             className="font-display"
-            style={{ fontSize: "clamp(2rem, 6vw, 4rem)" }}
+            style={{ fontSize: "clamp(1.8rem, 4vw, 3rem)" }}
           >
             Book a <span className="text-primary italic">Session</span>
           </h1>

@@ -47,7 +47,7 @@ export default function Gallery() {
           </span>
           <h1
             className="font-display mb-4 sm:mb-6"
-            style={{ fontSize: "clamp(2.5rem, 8vw, 6rem)" }}
+            style={{ fontSize: "clamp(2rem, 5vw, 3.5rem)" }}
           >
             Our <span className="text-primary italic">Facility</span>
           </h1>

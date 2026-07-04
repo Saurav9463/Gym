@@ -160,7 +160,7 @@ function Testimonials() {
             </div>
             <h2
               className="text-white leading-none"
-              style={{ fontFamily: "var(--font-display)", fontSize: "clamp(2.4rem, 5.5vw, 4.5rem)", letterSpacing: "0.04em" }}
+              style={{ fontFamily: "var(--font-display)", fontSize: "clamp(2rem, 4vw, 3.2rem)", letterSpacing: "0.04em" }}
             >
               WHAT MEMBERS <span className="text-primary">SAY</span>
             </h2>
@@ -447,7 +447,7 @@ export default function Home() {
               className="text-white mb-6 leading-none"
               style={{
                 fontFamily: "var(--font-display)",
-                fontSize: "clamp(3.2rem, 8vw, 7.5rem)",
+                fontSize: "clamp(2.2rem, 5vw, 4rem)",
                 letterSpacing: "0.04em",
                 fontWeight: 400,
               }}
@@ -572,7 +572,7 @@ export default function Home() {
               className="text-white mb-5 leading-none"
               style={{
                 fontFamily: "var(--font-display)",
-                fontSize: "clamp(2.2rem, 5.5vw, 5rem)",
+                fontSize: "clamp(1.8rem, 4vw, 3.2rem)",
                 letterSpacing: "0.04em",
               }}
             >
@@ -607,7 +607,7 @@ export default function Home() {
                   className="text-primary leading-none mb-2"
                   style={{
                     fontFamily: "var(--font-display)",
-                    fontSize: "clamp(3.5rem, 7vw, 6.5rem)",
+                    fontSize: "clamp(2.2rem, 4.5vw, 3.8rem)",
                     letterSpacing: "0.03em",
                   }}
                 >
@@ -668,7 +668,7 @@ export default function Home() {
               className="text-white leading-none max-w-lg"
               style={{
                 fontFamily: "var(--font-display)",
-                fontSize: "clamp(2rem, 4.5vw, 4.2rem)",
+                fontSize: "clamp(1.8rem, 3.5vw, 3rem)",
                 letterSpacing: "0.04em",
               }}
             >
@@ -755,7 +755,7 @@ export default function Home() {
               className="text-white leading-none"
               style={{
                 fontFamily: "var(--font-display)",
-                fontSize: "clamp(2.2rem, 5.5vw, 5rem)",
+                fontSize: "clamp(1.8rem, 4vw, 3.2rem)",
                 letterSpacing: "0.04em",
               }}
             >
@@ -787,7 +787,7 @@ export default function Home() {
               >
                 <span
                   className="font-display text-primary leading-none block mb-5"
-                  style={{ fontSize: "clamp(2.5rem, 5vw, 4rem)", letterSpacing: "0.06em", opacity: 0.22 }}
+                  style={{ fontSize: "clamp(1.8rem, 3.5vw, 2.8rem)", letterSpacing: "0.06em", opacity: 0.22 }}
                 >
                   {String(i + 1).padStart(2, "0")}
                 </span>
@@ -821,7 +821,7 @@ export default function Home() {
               className="text-white leading-none"
               style={{
                 fontFamily: "var(--font-display)",
-                fontSize: "clamp(2.2rem, 5.5vw, 5rem)",
+                fontSize: "clamp(1.8rem, 4vw, 3.2rem)",
                 letterSpacing: "0.04em",
               }}
             >
@@ -862,7 +862,7 @@ export default function Home() {
                   <div className="mb-1 flex items-baseline gap-1.5 mt-3">
                     <span
                       className="font-display text-white leading-none"
-                      style={{ fontSize: "clamp(2.8rem, 5.5vw, 4rem)", letterSpacing: "0.02em" }}
+                      style={{ fontSize: "clamp(2rem, 3.5vw, 2.8rem)", letterSpacing: "0.02em" }}
                     >
                       ₹{plan.price.toLocaleString()}
                     </span>
@@ -991,7 +991,7 @@ export default function Home() {
             className="text-white mb-6 leading-none"
             style={{
               fontFamily: "var(--font-display)",
-              fontSize: "clamp(2.6rem, 6.5vw, 6rem)",
+              fontSize: "clamp(2rem, 4.5vw, 3.5rem)",
               letterSpacing: "0.04em",
             }}
           >

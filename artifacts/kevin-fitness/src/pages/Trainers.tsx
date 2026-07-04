@@ -45,7 +45,7 @@ export default function Trainers() {
           </motion.span>
           <motion.h1
             initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }}
-            style={{ fontSize: "clamp(2.5rem, 8vw, 6rem)" }}
+            style={{ fontSize: "clamp(2rem, 5vw, 3.5rem)" }}
           >
             Our <span className="text-primary italic">Experts</span>
           </motion.h1>

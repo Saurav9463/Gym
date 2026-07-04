@@ -44,7 +44,7 @@ export default function Contact() {
           </span>
           <h1
             className="font-display mb-4 sm:mb-6"
-            style={{ fontSize: "clamp(2.5rem, 8vw, 6rem)" }}
+            style={{ fontSize: "clamp(2rem, 5vw, 3.5rem)" }}
           >
             Get in <span className="text-primary italic">Touch</span>
           </h1>
